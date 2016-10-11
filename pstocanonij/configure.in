@@ -1,10 +1,10 @@
 AC_INIT(filter/pstocanonij.c)
-AM_INIT_AUTOMAKE(pstocanonij, 1.0.0)
+AM_INIT_AUTOMAKE([pstocanonij], [3.40-1], [no-define])
 
 AM_CONFIG_HEADER(config.h)
 
 AC_ARG_ENABLE(progpath)
-if test "${enable_progpath}" = "" ; then
+if test "x${enable_progpath}" = "x" ; then
    enable_progpath="${ac_default_prefix}/bin"
 fi
 
@@ -19,7 +19,7 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_RANLIB
-AM_PROG_LIBTOOL
+LT_INIT
 
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lcups':
@@ -45,6 +45,7 @@ AC_CHECK_FUNCS([dup2 memset socket strdup strrchr])
 
 CFLAGS="-O2"
 
-AC_OUTPUT(Makefile
+AC_CONFIG_FILES([Makefile
                  filter/Makefile
-                 )
+                 ])
+AC_OUTPUT

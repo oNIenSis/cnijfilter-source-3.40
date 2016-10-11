@@ -8,7 +8,7 @@ AC_PROG_CXX
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-AM_PROG_LIBTOOL
+LT_INIT
 
 # Checks for libraries.
 
@@ -27,7 +27,7 @@ AC_CHECK_FUNCS([dup2 memset])
 
 CFLAGS="-O2"
 
-AC_OUTPUT(Makefile
+AC_CONFIG_FILES([Makefile
                  buftool/Makefile
-                 paramlist/Makefile)
-
+                 paramlist/Makefile])
+AC_OUTPUT

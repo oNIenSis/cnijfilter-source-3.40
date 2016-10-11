@@ -290,6 +290,24 @@ static short MakeBJPrintData
 			goto finish1;
 		}
 	}
+	/*---
+		Input Image open.
+		we deal width only ppm image format as stdin.
+	---*/
+	if ( lpbjinfo->bjfoption.stdswitch == ON ){
+#if DEBUGLOG
+		fprintf(stderr,"stdswitch == ON\n");
+#endif
+
+		/* set reverse flag (stdin only) */
+		if ((lpbjfltdevice->bjfltDuplex == CND_DUPLEX_AUTO) && (lpbjinfo->bjfoption.stapleside == STAPLESIDE_LONG)){
+			rev_flag = 1;
+		}
+		if ( bjf_image_open( &lpbjinfo->bjfimage, NULL ) < 0 ) goto finish1;
+
+	}else{
+		if ( bjf_image_open( &lpbjinfo->bjfimage, lpbjinfo->filename ) < 0 ) goto finish1;
+	}
 	
 	/****** IVEC Startjob ******/
 	if (lpbjinfo->bjfoption.is_ivec == 1){
@@ -312,6 +330,7 @@ static short MakeBJPrintData
 	if ( (cnclerr = CNCL_StartJob( &CnclData )) != CNCL_OK ) goto finish1;
 	outCmd( CnclData.outputBuffer, CnclData.outputSize, lpbjinfo->prn );
 
+#if 0
 	/*--- 
 		Input Image open. 
 		we deal width only ppm image format as stdin.
@@ -330,6 +349,7 @@ static short MakeBJPrintData
 	}else{
 		if ( bjf_image_open( &lpbjinfo->bjfimage, lpbjinfo->filename ) < 0 ) goto finish2;
 	}
+#endif
 
 	/*---
 		Get DataBaseName, and BJFLTCOM structure, which has printer infomation( wMediaType,

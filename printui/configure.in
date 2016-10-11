@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT(configure.in)
 AC_ARG_PROGRAM
 
-if test "${program_suffix}" = "NONE"; then
+if test "x${program_suffix}" = "xNONE"; then
   program_suffix="mp250"
   program_transform_name="s,\$\$,${program_suffix},;"
 fi
@@ -35,7 +35,7 @@ fi
 AC_SUBST(UI_DFLAGS)
 
 AC_ARG_ENABLE(libpath)
-if test "${enable_libpath}" = ""; then
+if test "x${enable_libpath}" = "x"; then
   enable_libpath="/usr/lib/bjlib"
 fi
 
@@ -43,7 +43,7 @@ AC_DEFINE_UNQUOTED(XBJLIBPATH, $enable_libpath)
 AC_SUBST(XBJLIBPATH)
 
 
-AC_ISC_POSIX
+AC_SEARCH_LIBS([strerror],[cposix])
 AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
