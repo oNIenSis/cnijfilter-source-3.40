@@ -233,7 +233,7 @@ void UpdateUserSizeWidgets(UIUserSizeDialog* dialog, gboolean init_flag)
 	gchar height_min_string_adjust[12];
 	gchar height_max_string_adjust[12];
 
-	// The scale of dialog->width and dialog->height is "mm", 
+	// The scale of dialog->width and dialog->height is "mm",
 	// so old_scale must be 0 when showing this dialog.
 	int old_scale = (init_flag)? 0 : dialog->old_scale;
 	int new_scale
@@ -324,7 +324,7 @@ void UpdateUserSizeWidgets(UIUserSizeDialog* dialog, gboolean init_flag)
 		sprintf( width_max_string_adjust, "%6.0f", (float)max_w * (float)10 );
 		sprintf( height_min_string_adjust, "%6.0f", (float)min_h * (float)10 );
 		sprintf( height_max_string_adjust, "%6.0f", (float)max_h * (float)10 );
-	
+
 		min_w_adjust = (double)atoi( width_min_string_adjust ) / (double)10;
 		max_w_adjust = (double)atoi( width_max_string_adjust ) / (double)10;
 		min_h_adjust = (double)atoi( height_min_string_adjust ) / (double)10;

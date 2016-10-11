@@ -61,7 +61,7 @@ GtkWidget* LookupWidget(GtkWidget* window, const gchar* name)
 #endif
 }
 
-GtkWidget* GetTopWidget(GtkWidget* widget) 
+GtkWidget* GetTopWidget(GtkWidget* widget)
 {
 	return gtk_widget_get_toplevel(widget);
 }
@@ -72,7 +72,7 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 	char *current_comb_supply_local = NULL;
 	short	len = 0;
 	short	current_comb_supply_id = 0;
-	
+
 #ifdef _PRINTUI_DEBUG_
 	fprintf(stderr,"\n### UpdateWidgets :except_name = %s ###\n",except_name);
 #endif
@@ -94,7 +94,7 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 		fprintf(stderr,"current_comb_supply_local = %s\n",current_comb_supply_local);
 #endif
 	}
-	
+
 	// Print bw button
 	if( !SameName(except_name, "print_bw_button") )
 	{
@@ -134,14 +134,14 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 		/* iP3300,MP510:Add "Front for Plain" (This value is always available) */
 		{
 			char *str;
-		
+
 			//GetAllFlags:If CND_SUPPLY_CASSETTE_04 exist --> str > 0
 			if( GetAllFlags( CNCL_MEDIASUPPLY , CND_SUPPLY_CASSETTE_04 ) >= 0 ){
 				str = ValueToName( CNCL_MEDIASUPPLY , CND_SUPPLY_FRONT_FOR_PLAIN );
 				glist = g_list_append(glist, str);
 			}
 		}
-		
+
 		/* Ver.2.70: for "Front for Plain" */
 		if( except_name!=NULL ){
 			/* UI setting at the top of this function is not disable on CNCLDB --> use it (to UI) */
@@ -150,7 +150,7 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 
 			/* Replace "CND_SUPPLY_FRONT_FOR_PLAIN" with "CND_SUPPLY_ASF" before check */
 			if( current_comb_supply_id == CND_SUPPLY_FRONT_FOR_PLAIN ) current_comb_supply_id = CND_SUPPLY_ASF;
-		
+
 			if( IsAvailableValue( CNCL_MEDIASUPPLY , current_comb_supply_id ) ){ /* UI setting is not disable on CNCLDB */
 				SetGListToComboBox(window, "media_supply_combo",glist, current_comb_supply_local , CNCL_MEDIASUPPLY );/* Ver.2.80 */
 
@@ -212,7 +212,7 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 	{
 		GtkWidget* button = LookupWidget(window, "color_auto_button");
 		gtk_toggle_button_set_active( GTK_TOGGLE_BUTTON(button), g_main_window->color_auto );
-		
+
 	}
 
 	// Color adjust radio button
@@ -251,9 +251,9 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 	// Media size combo
 	if( !SameName(except_name, "media_size_combo") )
 	{
-		/* for V320_a010 : To not resize the window. */ 
-		if( !( (SameName(except_name, "print_bw_button")) 
-		    || (SameName(except_name, "quality_buttons")) 
+		/* for V320_a010 : To not resize the window. */
+		if( !( (SameName(except_name, "print_bw_button"))
+		    || (SameName(except_name, "quality_buttons"))
 		    || (SameName(except_name, "color_buttons"))
 		    || (SameName(except_name, "printing_type_combo"))) )
 				//Ver.3.00
@@ -360,13 +360,13 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 		GtkSpinButton* copies_spin = (GtkSpinButton*)LookupWidget(window, "copies_spin");
 		gtk_adjustment_set_value(copies_spin->adjustment, (gfloat)g_main_window->copies);
 	}
-	
+
 
 	if(current_comb_supply_local){
 		free(current_comb_supply_local);
 		current_comb_supply_local = NULL;
 	}
-	
+
 	// Ver.2.90:Custom Paper Size dialog button
 	{
 		GtkWidget* hbox_user = LookupWidget(window, "hbox_user");
@@ -388,7 +388,7 @@ void UpdateWidgets(GtkWidget* window, gchar* except_name)
 	{
 		GtkWidget* supply_mes_label2 = LookupWidget(window, "supply_label2");
 		short	media,size;
-		
+
 		media = GetCurrentnValue(CNCL_MEDIATYPE);
 		size = GetCurrentnValue(CNCL_PAPERSIZE);
 
@@ -480,10 +480,10 @@ short SetGListToComboBox(GtkWidget* window, gchar *combo_name,
 	char *str;
 	short active_item,item_count;
 
-	
+
 	/* Remove all items in current list */
 	if(gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ){
-	
+
 		while( 1 ){
 			gtk_combo_box_set_active( GTK_COMBO_BOX( combo ), 0 );
 			if( ! gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ) break;
@@ -532,8 +532,8 @@ short SetItemsToComboBox(GtkWidget* window, gchar *combo_name, short objectid , 
 
 	/* Remove all items in current list */
 	if(gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ){
-	
-	
+
+
 		while( 1 ){
 			gtk_combo_box_set_active( GTK_COMBO_BOX( combo ), 0 );
 			if( ! gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ) break;
@@ -581,7 +581,7 @@ short ValueToComboIndex( GtkWidget *combo , short object , short target_value )
 
 	// search in the list of the combo
 	if(gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ){
-	
+
 		while( 1 ){
 			gtk_combo_box_set_active( GTK_COMBO_BOX( combo ), item_count );
 			combo_item_name = (char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo));
@@ -611,7 +611,7 @@ short NameToComboIndex( GtkWidget *combo , gchar *target_name )
 
 	// search in the list of the combo
 	if(gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ){
-	
+
 		while( 1 ){
 			gtk_combo_box_set_active( GTK_COMBO_BOX( combo ), item_count );
 
@@ -864,7 +864,7 @@ void DrawPrinterDrawingArea(GtkWidget* window, GtkWidget* area)
 		DrawPixmap(area_window, gc,
 				 COLOR_PIXMAP_X, COLOR_PIXMAP_Y, pixmap, mask);
 		FreePixmap(pixmap, mask);
-#endif	
+#endif
 		// Color type message.
 		message_str = LookupText(g_keytext_list, key_str);
 		DrawString(area_window, g_main_font, gc,
@@ -892,7 +892,7 @@ void DrawQualityDrawingArea(GtkWidget* window, GtkWidget* area)
 		"quality_custom_button",
 		NULL
 	};
-	const gchar* xpm_name[] = 
+	const gchar* xpm_name[] =
 	{
 		"quality_best.xpm",
 		"quality_best_color.xpm",

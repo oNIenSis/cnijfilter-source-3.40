@@ -46,7 +46,7 @@ void SaveDialog(UIDialog* dialog);
 void RestoreDialog(UIDialog* dialog);
 
 void ShowDialog(UIDialog* dialog, gchar* default_widget);
-void HideDialog(UIDialog* dialog); 
+void HideDialog(UIDialog* dialog);
 void UpdateDialog(UIDialog* dialog, GdkRectangle* rect);
 
 #endif

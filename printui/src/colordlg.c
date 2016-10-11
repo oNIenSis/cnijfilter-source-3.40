@@ -129,7 +129,7 @@ static short GetDefaultGamma(UIColorDialog* dialog)
 static short SetColorCorrectCombo(UIColorDialog* dialog, short color_correct)
 {
 	/* Ver.2.80*/
-	SetTextArrayToComboBox(UI_DIALOG(dialog)->window, "color_dialog_correct_combo",  
+	SetTextArrayToComboBox(UI_DIALOG(dialog)->window, "color_dialog_correct_combo",
 		correct_key, correct_value, color_correct);
 
 	return color_correct;
@@ -142,7 +142,7 @@ static short GetColorCorrectCombo(UIColorDialog* dialog)
 }
 
 static void SensitiveColorCorrectCombo(
-					UIColorDialog* dialog, gboolean sensitive) 
+					UIColorDialog* dialog, gboolean sensitive)
 {
 	GtkWidget* combo
 		= LookupWidget(UI_DIALOG(dialog)->window, "color_dialog_correct_combo");
@@ -239,7 +239,7 @@ void ShowColorDialog(UIColorDialog* dialog)
 
 	// Color correct combo.
 	dialog->color_correct = SetColorCorrectCombo(dialog, dialog->color_correct);
-	SensitiveColorCorrectCombo(dialog, !dialog->vivid); 
+	SensitiveColorCorrectCombo(dialog, !dialog->vivid);
 
 	// Gamma combo.
 	dialog->gamma = SetGammaCombo(dialog, dialog->gamma);
@@ -266,7 +266,7 @@ void ShowColorDialog(UIColorDialog* dialog)
 	/* Ver.2.80 */
 	EnableSignal();
 
-	ShowDialog((UIDialog*)dialog, "color_dialog_ok_button"); 
+	ShowDialog((UIDialog*)dialog, "color_dialog_ok_button");
 }
 
 void HideColorDialog(UIColorDialog* dialog, gboolean apply)

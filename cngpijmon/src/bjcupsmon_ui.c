@@ -22,7 +22,7 @@
 #include <libintl.h>
 #include <signal.h>
 
-#ifndef USE_libglade 
+#ifndef USE_libglade
 	#include  "support.h"
 #endif
 
@@ -621,7 +621,7 @@ PRIVATE	gint	updtPictFlg = FALSE;
 
 /*** Functions ***/
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboolean isPrinting, ENUM_OtherMessageID otherMsg)
 // IN     : gchar *pWindowTitle : Window title string.
 //          ST_PrinterStatus *pPrinterStatus : Information of printer status.
@@ -630,7 +630,7 @@ PRIVATE	gint	updtPictFlg = FALSE;
 //          ENUM_OtherMessageID otherMsg : Message ID except printer status message.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboolean isPrinting, ENUM_OtherMessageID otherMsg)
 {
 #ifdef USE_libglade
@@ -639,23 +639,23 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 	ENUM_STSMessageID	*pMessageID;					// Pointer to array of message ID.
 	gint				i;								// Counter.
 /*** Parameters end ***/
-	
+
 	// Create full path of glade file name.
 	memset (gladeFileName, 0, MAX_BUF_SIZE);
-	strncpy(gladeFileName, STR_SHARE_DIRECTORY_NAME, 
+	strncpy(gladeFileName, STR_SHARE_DIRECTORY_NAME,
 		(MAX_BUF_SIZE<(strlen(STR_SHARE_DIRECTORY_NAME)+strlen(GLADE_FILE_NAME)+1))? MAX_BUF_SIZE<(strlen(STR_SHARE_DIRECTORY_NAME)+strlen(GLADE_FILE_NAME)+1));
 	strcat(gladeFileName, "/");
 	strcat(gladeFileName, GLADE_FILE_NAME);
-	
+
 	// Show window.
 	gXmlMainWnd = glade_xml_new(gladeFileName, STR_WINDOW_NAME_MAIN);
-	
+
 	// Set window title.
 	setWindowTitle(STR_WINDOW_NAME_MAIN, pWindowTitle);
-	
+
 	// Initialize related cartridge area drawing handling.
 	initDrawing();
-	
+
 	// Disable [Cancel Printing] button.
 	activateWidget(STR_MAIN_BUTTON_NAME_CANCEL, FALSE);
 
@@ -667,7 +667,7 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 		// Enable [Cancel Printing] button.
 		//if (pPrinterStatus->printInterface == ID_DEV_1284 )
 		//	activateWidget(STR_MAIN_BUTTON_NAME_CANCEL, TRUE);
-		
+
 		//Ver.3.00 delete
 		//// Check messages.
 		//pMessageID = pPrinterStatus->pMessageID;
@@ -689,22 +689,22 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 		//	}
 		//	pMessageID++;
 		//}
-		
+
 		// Initialize UI settings related with printer status.
 		updateUISettings(pPrinterStatus, ID_OTHER_MESSAGE_NONE, TRUE, TRUE, TRUE, TRUE);
 	}
-	
+
 	// Hide [Continue] button.
 	showWidget(STR_MAIN_BUTTON_NAME_CONTINUE, FALSE);
 
-	//for Ver.2.70 
+	//for Ver.2.70
 	showWidget(STR_MAIN_BUTTON_NAME_CANCEL, FALSE);
-	
+
 	// Signal connect.
 	glade_xml_signal_autoconnect(gXmlMainWnd);
-	
+
 	return;
-	
+
 #else	// use Gtk+-1.2
 
 /*** Parameters start ***/
@@ -718,13 +718,13 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 
 	// Initialize related cartridge area drawing handling.
 	initDrawing();
-	
+
 	// Set window title.
 	setWindowTitle(STR_WINDOW_NAME_MAIN, pWindowTitle);
 
 	// Disable [Cancel Printing] button.
 	//activateWidget(STR_MAIN_BUTTON_NAME_CANCEL, FALSE);
-		
+
 	if (isPrinting == FALSE) {	// Not printing.
 		// Initialize UI settings. (Without printer status.)
 		updateUISettings(NULL, otherMsg, TRUE, TRUE, TRUE, TRUE);
@@ -733,7 +733,7 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 		// Enable [Cancel Printing] button.
 		//if (pPrinterStatus->printInterface == ID_DEV_1284 )
 		//	activateWidget(STR_MAIN_BUTTON_NAME_CANCEL, TRUE);
-		
+
 		//Ver.3.00 delete
 		//// Check messages.
 		//pMessageID = pPrinterStatus->pMessageID;
@@ -755,16 +755,16 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 		//	}
 		//	pMessageID++;
 		//}
-		
+
 		// Initialize UI settings related with printer status.
 		updateUISettings(pPrinterStatus, ID_OTHER_MESSAGE_NONE, TRUE, TRUE, TRUE, TRUE);
 	}
 	// Hide [Continue] button.
 	//showWidget(STR_MAIN_BUTTON_NAME_CONTINUE, FALSE);
 
-	//for Ver.2.70 
+	//for Ver.2.70
 	//showWidget(STR_MAIN_BUTTON_NAME_CANCEL, FALSE);
-	
+
 	// Show
 	showWidget(STR_WINDOW_NAME_MAIN, TRUE);
 
@@ -772,7 +772,7 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 //	memset( &sa, 0, sizeof(sa));
 //	sa.sa_handler = sighand_term;
 //	if( sigaction( SIGTERM, &sa, NULL) ) perror("sigaction");
-	
+
 	return;
 #endif 	// USE_libglade
 
@@ -780,7 +780,7 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessageID otherMsg, gboolean updateCT, gboolean updateLP, gboolean updateMSG, gboolean updateCHD)
 // IN     : ST_PrinterStatus *pPrinterStatus : Information of printer status.
 //          ENUM_OtherMessageID otherMsg : Message ID except printer status message.
@@ -790,7 +790,7 @@ PUBLIC void initUI(gchar *pWindowTitle, ST_PrinterStatus *pPrinterStatus, gboole
 //          gboolean updateCHD : Update cartridge pictures area or not.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessageID otherMsg, gboolean updateCT, gboolean updateLP, gboolean updateMSG, gboolean updateCHD)
 {
 /*** Parameters start ***/
@@ -802,7 +802,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 	gboolean			flag = FALSE;
 	gboolean			unknownFlag = FALSE;
 /*** Parameters end ***/
-	
+
 	//printf("updateUI ct:%d updateLP:%d chd:%d otherMsg:%d\n",updateCT,updateLP,updateCHD,otherMsg);
 
 	if (updateCT == TRUE) {
@@ -827,7 +827,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 							//strcat(tempBuf, dgettext(PACKAGE, N_("Scanner")));
 						}
 						break;
-						
+
 					case ID_CARTRIDGE_TYPE_UNSUPPORTED:		// Unsupported cartridge.
 						if (i == 0) {
 							strcat(tempBuf, "Unsupported");
@@ -842,7 +842,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 							//strcat(tempBuf, dgettext(PACKAGE, N_("Unsupported")));
 						}
 						break;
-						
+
 					case ID_CARTRIDGE_TYPE_PHOTO:			// F850 type.
 					case ID_CARTRIDGE_TYPE_PHOTO2:			// 950i type.
 					case ID_CARTRIDGE_TYPE_PHOTO_990i:		// 990i type.
@@ -863,7 +863,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 							//strcat(tempBuf, dgettext(PACKAGE, N_("Photo")));
 						}
 						break;
-						
+
 					case ID_CARTRIDGE_TYPE_BLACK:			// F360 type (Black).
 					case ID_CARTRIDGE_TYPE_BLACK_ip2200:	// iP2200 type (Black)
 					case ID_CARTRIDGE_TYPE_BLACK_HC_ip2200:	// iP2200 type (Black High Capa)
@@ -881,7 +881,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 							//strcat(tempBuf, dgettext(PACKAGE, N_("Black")));
 						}
 						break;
-						
+
 					case ID_CARTRIDGE_TYPE_COLOR_S600:		// S600 type.
 					case ID_CARTRIDGE_TYPE_COLOR_860i:		// 860i type.
 					case ID_CARTRIDGE_TYPE_COLOR_S300:		// S300 type (CIL:OFF).
@@ -889,8 +889,8 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 					case ID_CARTRIDGE_TYPE_COLOR_ip2200:	// iP2200 type (Color)
 					case ID_CARTRIDGE_TYPE_COLOR_HC_ip2200:	// iP2200 type (Color High Capa)
 					case ID_CARTRIDGE_TYPE_COLOR_MN_ip2200:	// iP2200 type (Color Mini)
-					case ID_CARTRIDGE_TYPE_COLOR_ip4200:	// iP4200 type 
-					case ID_CARTRIDGE_TYPE_COLOR_ip3300:	// iP3300 type 
+					case ID_CARTRIDGE_TYPE_COLOR_ip4200:	// iP4200 type
+					case ID_CARTRIDGE_TYPE_COLOR_ip3300:	// iP3300 type
 						if (i == 0) {
 							strcat(tempBuf, "Color");
 							//strcat(tempBuf, dgettext(PACKAGE, N_("Color")));
@@ -904,7 +904,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 							//strcat(tempBuf, dgettext(PACKAGE, N_("Color")));
 						}
 						break;
-						
+
 					default:	// Another value.
 						if (i == 0) {
 							unknownFlag = TRUE;
@@ -919,14 +919,14 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 		}
 		//setLabelString(STR_MAIN_LABEL_CARTRIDGE_TYPE, tempBuf);
 	}
-	
+
 	if (updateLP == TRUE) {
 		// Set paper thickness position string.
 		if (pPrinterStatus != NULL) {
 			memset(tempBuf, 0, sizeof(tempBuf));
-			
-			if( pPrinterStatus->leverPosition != ID_LEVER_POSITION_INVALID 
-			  && pPrinterStatus->leverPosition != ID_LEVER_POSITION_NONE ) 
+
+			if( pPrinterStatus->leverPosition != ID_LEVER_POSITION_INVALID
+			  && pPrinterStatus->leverPosition != ID_LEVER_POSITION_NONE )
 				strncpy(tempBuf, dgettext(PACKAGE, ID_STS_MESSAGE_PAPERTHICKNESS_LEVERPOSITION), MAX_BUF_SIZE-1);
 				//strncpy(tempBuf, dgettext(PACKAGE, N_("Paper Thickness Lever Position: ")), MAX_BUF_SIZE-1);
 			else
@@ -937,28 +937,28 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 					strcat(tempBuf, "Up");
 					//strcat(tempBuf, dgettext(PACKAGE, N_("Up")));
 					break;
-				
+
 				case ID_LEVER_POSITION_DOWN:	// Down.
 					strcat(tempBuf, "Down");
 					//strcat(tempBuf, dgettext(PACKAGE, N_("Down")));
 					break;
-				
+
 				case ID_LEVER_POSITION_LEFT:	// Left.
 					strcat(tempBuf, dgettext(PACKAGE,ID_STS_MESSAGE_LEFT));
 					//strcat(tempBuf, dgettext(PACKAGE, N_("Left")));
 					break;
-				
+
 				case ID_LEVER_POSITION_RIGHT:	// Right.
 					strcat(tempBuf, dgettext(PACKAGE, ID_STS_MESSAGE_RIGHT));
 					//strcat(tempBuf, dgettext(PACKAGE, N_("Right")));
 					break;
-				
+
 				default:
 					break;
 			}
 			setLabelString(STR_MAIN_LABEL_LEVER_POSITION, tempBuf);
 		}
-		
+
 		//Ver.2.90 when PrinterStatus does't exist, lever position disappear.
 		else
 		{
@@ -966,7 +966,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 			setLabelString(STR_MAIN_LABEL_LEVER_POSITION, tempBuf);
 		}
 	}
-	
+
 	if (updateMSG == TRUE) {
 		// Set message string.
 		freezeText(STR_MAIN_TEXT_STATUS, TRUE);
@@ -991,7 +991,7 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 						g_free(message2);
 						//Ver.3.10 net nesseesarry
 						//break;
-						
+
 						//if (*pMessageID == ID_STS_MESSAGE_SC_SERVICE_ERROR_PRE) {
 						//	gchar * msgPtr = dgettext(PACKAGE, gSTSMessageTable[*pMessageID]);
 						//	gchar * message1
@@ -1023,12 +1023,12 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 		//Ver.3.00
 		//for (i = 0; i < pPrinterStatus->messageNum; i++) {
 		//	if( (*pMessageID == ID_STS_MESSAGE_OC_OTHER )
-		//	 //Ver.3.00 add 
+		//	 //Ver.3.00 add
 		//	 || (*pMessageID == ID_STS_MESSAGE_CARTRIDGE_NONE )
 		//	 || (*pMessageID == ID_STS_MESSAGE_BUSY_PRINTER_USED ) ) {
 		//		pictDrawFlg = FALSE;	// disable draw pict area
 		//	}
-		//	else if((*pMessageID == ID_STS_MESSAGE_OC_REFILL ) 
+		//	else if((*pMessageID == ID_STS_MESSAGE_OC_REFILL )
 		//		 //|| (*pMessageID == ID_STS_MESSAGE_OC_REFILL2 )
 		//		 || (*pMessageID == ID_STS_MESSAGE_OC_REMAIN_UNKNOWN1 )
 		//		 || (*pMessageID == ID_STS_MESSAGE_OC_REMAIN_UNKNOWN2 ) ) {
@@ -1041,11 +1041,11 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 		if( pPrinterStatus->disablepictarea_drawflag == 1 )
 			pictDrawFlg = FALSE;	// disable draw pict area
 		if( pPrinterStatus->unknownicon_drawflag == 1 )
-			updtPictFlg = TRUE;		// unknown icon 
+			updtPictFlg = TRUE;		// unknown icon
 
 		if( drawFlg != pictDrawFlg ) {
 			if( pictDrawFlg == FALSE ) {
-				// Clear cartridge pixmap area 
+				// Clear cartridge pixmap area
 				clearCartridgePictArea();
 			}
 			else {
@@ -1092,60 +1092,60 @@ PUBLIC void updateUISettings(ST_PrinterStatus *pPrinterStatus, ENUM_OtherMessage
 			clearCartridgePictArea();
 		}
 	}
-	
+
 	return;
 }// End updateUISettings
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PRIVATE void setWindowTitle(const gchar *pWidgetName, const gchar *pWindowTitle)
 // IN     : const gchar *pWidgetName : Widget name.
 //          const gchar *pWindowTitle : Window title string.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void setWindowTitle(const gchar *pWidgetName, const gchar *pWindowTitle)
 {
 /*** Parameters start ***/
 	GtkWidget	*widget = NULL;		// Temporary pointer to widget.
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 	gtk_window_set_title(GTK_WINDOW(widget), (const gchar*)pWindowTitle);
-	
+
 	return;
 }// End setWindowTitle
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PRIVATE void setLabelString(const gchar *pWidgetName, const gchar *pString)
 // IN     : const gchar *pWidgetName : Widget name.
 //          const gchar *pString : Label string.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void setLabelString(const gchar *pWidgetName, const gchar *pString)
 {
 /*** Parameters start ***/
 	GtkWidget	*widget = NULL;		// Temporary pointer to widget.
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 	gtk_label_set_text(GTK_LABEL(widget), pString);
-	
+
 	return;
 }// End setLabelString
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PRIVATE void clearTextArea(const gchar *pWidgetName)
 // IN     : const gchar *pWidgetName : Widget name.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void clearTextArea(const gchar *pWidgetName)
 {
 /*** Parameters start ***/
@@ -1156,7 +1156,7 @@ PRIVATE void clearTextArea(const gchar *pWidgetName)
 	GtkTextBuffer *buffer;
 #endif
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 #ifdef USE_GTK12
 	gtk_editable_delete_text(GTK_EDITABLE(widget), 0, -1);
@@ -1166,20 +1166,20 @@ PRIVATE void clearTextArea(const gchar *pWidgetName)
 	gtk_text_buffer_get_end_iter(buffer, &end);
 
 	gtk_text_buffer_delete(buffer, &start, &end);
-#endif	  
-	
+#endif
+
 	return;
 }// End clearTextArea
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PRIVATE void insertStringToText(const gchar *pWidgetName, const gchar *pString)
 // IN     : const gchar *pWidgetName : Widget name.
 //          const gchar *pString : Text string.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void insertStringToText(const gchar *pWidgetName, const gchar *pString)
 {
 /*** Parameters start ***/
@@ -1189,7 +1189,7 @@ PRIVATE void insertStringToText(const gchar *pWidgetName, const gchar *pString)
 	GtkTextIter start, end;
 #endif
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 #ifdef USE_GTK12
 	gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL, dgettext(PACKAGE, pString), -1);
@@ -1213,7 +1213,7 @@ PRIVATE void insertStringToText_NoConv(const gchar *pWidgetName, const gchar *pS
 	GtkTextIter start, end;
 #endif
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 #ifdef USE_GTK12
 	gtk_text_insert(GTK_TEXT(widget), NULL, NULL, NULL, pString, -1);
@@ -1229,20 +1229,20 @@ PRIVATE void insertStringToText_NoConv(const gchar *pWidgetName, const gchar *pS
 }// End insertStringToText_NoConv
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PRIVATE void freezeText(const gchar *pWidgetName, gboolean freeze)
 // IN     : const gchar *pWidgetName : Widget name.
 //          gboolean freeze : TRUE : Freeze widget.
 //                            FALSE : Thaw widget.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void freezeText(const gchar *pWidgetName, gboolean freeze)
 {
 /*** Parameters start ***/
 	GtkWidget	*widget = NULL;		// Temporary pointer to widget.
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 
 #ifdef USE_GTK12
@@ -1253,48 +1253,48 @@ PRIVATE void freezeText(const gchar *pWidgetName, gboolean freeze)
 		gtk_text_freeze(GTK_TEXT(widget));
 	}
 #endif
-	
+
 	return;
 }// End freezeText
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PRIVATE void freezeText(const gchar *pWidgetName, gboolean freeze)
 // IN     : const gchar *pWidgetName : Widget name.
 //          gboolean freeze : TRUE : Freeze widget.
 //                            FALSE : Thaw widget.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PUBLIC void activateWidget(const gchar *pWidgetName, gboolean activate)
 {
 /*** Parameters start ***/
 	GtkWidget	*widget = NULL;		// Temporary pointer to widget.
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 	gtk_widget_set_sensitive(GTK_WIDGET(widget), activate);
-	
+
 	return;
 }// End activateWidget
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PRIVATE void showWidget(const gchar *pWidgetName, gboolean show)
 // IN     : const gchar *pWidgetName : Widget name.
 //          gboolean freeze : TRUE : Show widget.
 //                            FALSE : Hide widget.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void showWidget(const gchar *pWidgetName, gboolean show)
 {
 /*** Parameters start ***/
 	GtkWidget	*widget = NULL;		// Temporary pointer to widget.
 /*** Parameters end ***/
-	
+
 	widget = lookupWidget(pWidgetName);
 	if (show == TRUE) {
 		gtk_widget_show(GTK_WIDGET(widget));
@@ -1302,18 +1302,18 @@ PRIVATE void showWidget(const gchar *pWidgetName, gboolean show)
 	else {
 		gtk_widget_hide(GTK_WIDGET(widget));
 	}
-	
+
 	return;
 }// End activateWidget
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PUBLIC GtkWidget* lookupWidget(const gchar *pWidgetName)
 // IN     : const gchar *pWidgetName : Widget name.
 // OUT    : None.
 // RETURN : Pointer to widget.
-// 
+//
 PUBLIC GtkWidget* lookupWidget(const gchar *pWidgetName)
 {
 #ifdef USE_libglade
@@ -1325,18 +1325,18 @@ PUBLIC GtkWidget* lookupWidget(const gchar *pWidgetName)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PUBLIC void outputCommandLineMessage(ENUM_OtherMessageID messageID)
 // IN     : ENUM_OtherMessageID messageID : ID of other (except printer status) message
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PUBLIC void outputCommandLineMessage(ENUM_OtherMessageID messageID)
 {
 	if (messageID > ID_OTHER_MESSAGE_NONE) {
 		fprintf(stderr, gOtherMessageTable[messageID]);
 	}
-	
+
 	return;
 }// End outputCommandLineMessage
 

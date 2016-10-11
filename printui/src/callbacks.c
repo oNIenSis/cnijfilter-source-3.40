@@ -74,7 +74,7 @@ static void SetBJFltDevice(LPBJFLTDEVICE bjdev)
 		len = strlen(current_comb_supply) + 1;
 		current_comb_supply_local = malloc( len );
 		memset(current_comb_supply_local,0x00, len );
-	
+
 		strncpy( current_comb_supply_local , current_comb_supply , len );
 		current_comb_supply_local[len-1] = '\0';
 		current_ui_supply = NameToValue( CNCL_MEDIASUPPLY , current_comb_supply_local );
@@ -82,7 +82,7 @@ static void SetBJFltDevice(LPBJFLTDEVICE bjdev)
 		fprintf(stderr,"\nSetBJFltDevice:current_comb_supply_local = %s current_ui_supply = %d \n",current_comb_supply_local,current_ui_supply);
 #endif
 	}
-	
+
 
 	// Prepare for BJFLTDEVICE structure.
 	bjdev->bjfltModelID      = g_uidb.ModelID;
@@ -119,15 +119,15 @@ static void SetBJFltDevice(LPBJFLTDEVICE bjdev)
 
 	//for "Front for Plain":Change "bjdev->bjfltMediaSupply"(according to Media and PageSize)
 	if( current_ui_supply == CND_SUPPLY_FRONT_FOR_PLAIN ){
-	
-		if( ( bjdev->bjfltMediaType == CND_MEDIA_PLAIN ) && 
+
+		if( ( bjdev->bjfltMediaType == CND_MEDIA_PLAIN ) &&
 			( ( bjdev->bjfltPaperSize == CND_SIZE_A4 ) || ( bjdev->bjfltPaperSize == CND_SIZE_LETTER ) || ( bjdev->bjfltPaperSize == CND_SIZE_B5 ) ) )
 		{
 			bjdev->bjfltMediaSupply = CND_SUPPLY_CASSETTE_04;
 		}else{
 			bjdev->bjfltMediaSupply = CND_SUPPLY_ASF;
 		}
-		
+
 #ifdef _PRINTUI_DEBUG_
 		fprintf(stderr,"SetBJFltDevice: supply changed!\n media=%d\n size=%d\n supply=%d\n\n"
 		,bjdev->bjfltMediaType,bjdev->bjfltPaperSize,bjdev->bjfltMediaSupply);
@@ -148,7 +148,7 @@ static void SetBJFltColorSystem(LPBJFLTCOLORSYSTEM bjcolor)
 	memset(bjcolor, 0, sizeof(BJFLTCOLORSYSTEM));	/* for reserve */
 
 	if( g_main_window->color_auto )
-		g_color_dialog = 
+		g_color_dialog =
 			ReCreateColorDialog(g_color_dialog, UI_DIALOG(g_main_window));
 
 	if( IsGrayPrint(g_main_window) )
@@ -322,7 +322,7 @@ on_ok_button_clicked                   (GtkButton       *button,
 
 	/* Ver.3.00: "Page Size <-> Duplex" mismatch check */
 	duplex_value = GetCurrentnValue(CNCL_DUPLEX_PRINTING);
-	
+
 	if( duplex_value == CND_DUPLEX_AUTO ){
 		if( !IsAvailableSizeDuplex() )		/* mismatch!! */
 		{
@@ -342,12 +342,12 @@ on_ok_button_clicked                   (GtkButton       *button,
 			message_len = strlen(dialog_msg2) + strlen(change_obj) + 1; /* "1":\0 */
 			tmp_message = (gchar*)g_malloc( message_len );
 			snprintf( tmp_message , message_len , dialog_msg2, change_obj );
-			
+
 			/* message: "A paper size that..." + tmp_message */
 			message_len = strlen(dialog_msg1) + strlen(tmp_message) + 2; /* "2":\n+\0 */
 			message = (gchar*)g_malloc( message_len );
 			snprintf( message , message_len , "%s\n%s" ,dialog_msg1, tmp_message );
-			
+
 			UtilMessageBox( message,g_window_title, MB_ICON_NO | MB_OK);
 			g_free( message );
 			g_free( tmp_message );
@@ -365,29 +365,29 @@ on_ok_button_clicked                   (GtkButton       *button,
 		gchar* change_obj;
 		gchar* change_to;
 		short message_len;
-	
+
 		/* Create message */
 		dialog_msg1 = LookupText(g_keytext_list, "LUM_MessPSNotCasette_M");
 		dialog_msg2 = LookupText(g_keytext_list, "LUM_AlertMessPaperNotFedFromCassetteOrFront");
 		change_obj = LookupText(g_keytext_list, "LUM_MODIFY_IDD_PAG_MAIN_IDC_STT_PAPERFEED");
 		change_to = (gchar*)ValueToName( CNCL_MEDIASUPPLY , CND_SUPPLY_ASF );
-	
+
 		/* tmp_message: "Change the [%s] setting to [%s]." */
 		message_len = strlen(dialog_msg2) + strlen(change_obj) + strlen(change_to) + 1; /* "1":\0 */
 		tmp_message = (gchar*)g_malloc( message_len );
 		snprintf( tmp_message , message_len , dialog_msg2, change_obj , change_to);
-		
+
 		/* message: "A paper size that cannot..." + tmp_message */
 		message_len = strlen(dialog_msg1) + strlen(tmp_message) + 2; /* "2":\n+\0 */
 		message = (gchar*)g_malloc( message_len );
 		snprintf( message ,message_len , "%s\n%s" ,dialog_msg1 , tmp_message );
-		
+
 		UtilMessageBox( message,g_window_title, MB_ICON_NO | MB_OK);
 		g_free( message );
 		g_free( tmp_message );
 		return;
 	}
-	
+
 
 	// Check Media type and Media size combination.
 	if( CheckMediaSizeCombination(&bjdev, &change_item) != TRUE )
@@ -410,7 +410,7 @@ on_ok_button_clicked                   (GtkButton       *button,
 		short i;
 
 		for ( i=0; i< g_uidb.dbsize; i++, lpdb++ ){
-			if ( (lpdb->nObjectID == CNCL_LOWER_PAPERSUPPORT_SIZE) 
+			if ( (lpdb->nObjectID == CNCL_LOWER_PAPERSUPPORT_SIZE)
 				&& (lpdb->nValue == bjdev.bjfltPaperSize)){
 					/* show dialog */
 					gchar* dialog_msg1;
@@ -418,12 +418,12 @@ on_ok_button_clicked                   (GtkButton       *button,
 					UtilMessageBox( dialog_msg1,g_window_title, MB_ICON_NO | MB_OK);
 			}
 		}
-	}	
+	}
 	/* Ver.3.20:Envelope size printing guide */
 	else {
 		short i=0;
 		GuideDialogTable current=g_env_guide_table[0];
-		
+
 		while( current.model_id > 0 )
 		{
 			if( current.model_id == bjdev.bjfltModelID )	/* model check */
@@ -439,18 +439,18 @@ on_ok_button_clicked                   (GtkButton       *button,
 						UtilMessageBox( dialog_msg1,g_window_title, MB_ICON_NO | MB_OK);
 					}
 					j++;
-					
+
 				}
 			}
 			i++;
 			current = g_env_guide_table[i];
 		}
 	}
-	
-	
+
+
 	/* Formattype>=6 --> ColorDialog2 , others --> ColorDialog */
 	if( type>=6 ){
-		SetBJFltColorSystem2(&bjcolor);	
+		SetBJFltColorSystem2(&bjcolor);
 	}else{
 		SetBJFltColorSystem(&bjcolor);
 	}
@@ -710,7 +710,7 @@ on_quality_button_clicked              (GtkButton       *button,
 				}else{
 					ht_value = CND_UIBIN_PATTERN;
 				}
-				UpdateMenuLink(CNCL_DITHER_PAT, ht_value);	
+				UpdateMenuLink(CNCL_DITHER_PAT, ht_value);
 #ifdef _PRINTUI_DEBUG_
 				fprintf(stderr,"\nCurrent HT=%d(old:%d)\n",ht_value,CND_UIBIN_ED);
 #endif
@@ -723,7 +723,7 @@ on_quality_button_clicked              (GtkButton       *button,
 				break;
 			}
 		}
-		
+
 
 		UpdateWidgets(window, "quality_buttons");
 #ifdef	GUI_WITH_PIXMAPS
@@ -749,7 +749,7 @@ update_by_media_type_entry()
 	old_supply = GetCurrentnValue(CNCL_MEDIASUPPLY);
 
 	UpdateMenuLink(CNCL_MEDIATYPE, type_value);
-	
+
 	/* Get supply value after UpdateMenuLink */
 	new_supply = GetCurrentnValue(CNCL_MEDIASUPPLY);
 
@@ -761,21 +761,21 @@ update_by_media_type_entry()
 		gchar* change_from;
 		gchar* change_to;
 		short message_len;
-		
+
 		change_from = (gchar*)ValueToName( CNCL_MEDIASUPPLY , old_supply );
 		change_to = (gchar*)ValueToName( CNCL_MEDIASUPPLY , new_supply );
-		
+
 		dialog_msg = LookupText(g_keytext_list, "media_supply_change_mes");
 		message_len = strlen(dialog_msg) + strlen(change_from) + strlen(change_to) +1;
 		message = (gchar*)g_malloc( message_len );
 		snprintf( message , message_len , dialog_msg , change_from , change_to );
-	
+
 		UtilMessageBox(message,g_window_title, MB_ICON_EXCLAMATION | MB_OK);
-		
+
 		g_free( message );
-		
+
 	}
-	
+
 
 	UpdateWidgets(window, "media_type_combo");
 #ifdef	GUI_WITH_PIXMAPS
@@ -808,7 +808,7 @@ update_by_media_size_entry()
 
 	/* Ver.3.00: Delete "PageSize <-> Supply mismatch check" */
 	{
-		UpdateMenuLink(CNCL_PAPERSIZE, value);	
+		UpdateMenuLink(CNCL_PAPERSIZE, value);
 
 		if( CND_SIZE_USER == GetCurrentnValue(CNCL_PAPERSIZE) )
 		{
@@ -859,10 +859,10 @@ update_by_cartridge_type_entry()
 
 	GtkWidget* combo = LookupWidget(window,  "cartridge_type_combo");
 	name = (char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo));
-	
+
 	/* Ver.2.80 */
 	if( !name ) my_printui_quit();
-	
+
 	new_cartridge_value = NameToValue(CNCL_CARTRIDGE, name );
 
 
@@ -1109,7 +1109,7 @@ fprintf(stderr,"on_borderless_button_clicked:DisableSignal = TRUE g_valid_signal
 		/* Ver.2.80 : To resize the window now. */
 		while( gtk_events_pending() ){
 			gtk_main_iteration();
-		}			
+		}
 		UpdateWidgets(window, "borderless_button");
 
 
@@ -1281,7 +1281,7 @@ on_combo_button_event(GtkWidget* widget,
 							 GdkEvent* event,
 							 gpointer user_data)
 {
-	if( event->type == GDK_2BUTTON_PRESS 
+	if( event->type == GDK_2BUTTON_PRESS
 	 || event->type == GDK_3BUTTON_PRESS )
 		return TRUE;
 	else
@@ -1406,11 +1406,11 @@ static void display_ui_settings( short format , IPCU ipc )
 	fprintf(stderr,"bjfltMonochromeTone = %d\n",ipc.parm.bjfltcolor.bjfltMonochromeTone);/* Ver.3.40 */
 
 	fprintf(stderr,"\n<< BJFLT_UISETUP >>\n");
-	fprintf(stderr,"bjflt_fit = %d\n", ipc.parm.bjflt_uisetup.bjflt_fit );		
-	fprintf(stderr,"bjflt_percent = %d\n", ipc.parm.bjflt_uisetup.bjflt_percent );	
+	fprintf(stderr,"bjflt_fit = %d\n", ipc.parm.bjflt_uisetup.bjflt_fit );
+	fprintf(stderr,"bjflt_percent = %d\n", ipc.parm.bjflt_uisetup.bjflt_percent );
 	fprintf(stderr,"bjflt_extension = %d\n", ipc.parm.bjflt_uisetup.bjflt_extension );
-	fprintf(stderr,"bjflt_location = %d\n", ipc.parm.bjflt_uisetup.bjflt_location );	
-	fprintf(stderr,"bjflt_copies = %d\n", ipc.parm.bjflt_uisetup.bjflt_copies );	
+	fprintf(stderr,"bjflt_location = %d\n", ipc.parm.bjflt_uisetup.bjflt_location );
+	fprintf(stderr,"bjflt_copies = %d\n", ipc.parm.bjflt_uisetup.bjflt_copies );
 	fprintf(stderr,"bjflt_stapleside = %d\n", ipc.parm.bjflt_uisetup.bjflt_stapleside );
 
 }
@@ -1433,31 +1433,31 @@ static void check_ui_setting_and_ipc( short format , IPCU ipc )
 	comb_media = (char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(media_combobox));
 	comb_supply = (char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(supply_combobox));
 	comb_size = (char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(size_combobox));
-	
+
 	fprintf(stderr,"\n## check_ui_setting_and_ipc<format = %d> ##\n" ,format );
 
 	/* Supply */
 	fprintf(stderr,"[Supply]    UI:%s(%d) - IPCU:%s(%d)\n",  comb_supply , NameToValue(CNCL_MEDIASUPPLY , comb_supply ) ,
 												ValueToName(CNCL_MEDIASUPPLY, ipc.parm.bjfltdev.bjfltMediaSupply),ipc.parm.bjfltdev.bjfltMediaSupply );
-																
+
 	if( NameToValue(CNCL_MEDIASUPPLY , comb_supply ) != ipc.parm.bjfltdev.bjfltMediaSupply ) fprintf(stderr,"\n!!!!!! ERROR !!!!!!\n");
 
 	/* Media */
 	fprintf(stderr,"[Media]     UI:%s(%d) - IPCU:%s(%d)\n",  comb_media , NameToValue(CNCL_MEDIATYPE , comb_media ) ,
 												ValueToName(CNCL_MEDIATYPE, ipc.parm.bjfltdev.bjfltMediaType) , ipc.parm.bjfltdev.bjfltMediaType );
-																
+
 	if( NameToValue(CNCL_MEDIATYPE , comb_media ) != ipc.parm.bjfltdev.bjfltMediaType ) fprintf(stderr,"\n!!!!!! ERROR !!!!!!\n");
 
 	/* Size */
 	fprintf(stderr,"[Size]      UI:%s(%d) - IPCU:%s(%d)\n",  comb_size , NameToValue(CNCL_PAPERSIZE , comb_size ) ,
 												ValueToName(CNCL_PAPERSIZE, ipc.parm.bjfltdev.bjfltPaperSize),ipc.parm.bjfltdev.bjfltPaperSize );
-																
+
 	if( NameToValue(CNCL_PAPERSIZE , comb_size ) != ipc.parm.bjfltdev.bjfltPaperSize ) fprintf(stderr,"\n!!!!!! ERROR !!!!!!\n");
 
 	/* Grayscale */
 	/* IPC...ON:0 , OFF:1 */
 	fprintf(stderr,"[Grayscale] UI:(%d) - IPCU:(%d)\n", GTK_TOGGLE_BUTTON( LookupWidget(window, "print_bw_button2"))->active , ipc.parm.bjfltdev.bjfltGrayScale );
-	
+
 	/* Borderless */
 	/* IPC...NORMAL:0 , MINUS:1 */
 	fprintf(stderr,"[Borderless]UI:(%d) - IPCU:(%d)\n",  GTK_TOGGLE_BUTTON( LookupWidget(window, "borderless_button"))->active , ipc.parm.bjfltdev.bjfltMarginType );
@@ -1554,12 +1554,12 @@ on_color_dialog_correct_combo2_changed (GtkComboBox     *combobox,
 {
 	char *combo_intent = NULL;
 	short intent_id;
-	
+
 	if( DisableSignal() )
 	{
 		combo_intent = (char*)gtk_combo_box_get_active_text( combobox );
 		intent_id = NameToValue( CNCL_INTENT , combo_intent );
-	
+
 		UpdateMenuLink(CNCL_INTENT, intent_id);
 	}
 	EnableSignal();
@@ -1572,12 +1572,12 @@ on_color_dialog_gamma_combo2_changed   (GtkComboBox     *combobox,
 {
 	char *combo_gamma = NULL;
 	short gamma_id;
-	
+
 	if( DisableSignal() )
 	{
 		combo_gamma = (char*)gtk_combo_box_get_active_text( combobox );
 		gamma_id = NameToValue( CNCL_INPUT_GAMMA , combo_gamma );
-	
+
 		UpdateMenuLink(CNCL_INPUT_GAMMA, gamma_id);
 	}
 	EnableSignal();
@@ -1603,7 +1603,7 @@ on_color_dialog_gamma_combo_changed    (GtkComboBox     *combobox,
 	{
 		combo_gamma = (char*)gtk_combo_box_get_active_text( combobox );
 		gamma_id = NameToValue( CNCL_INPUT_GAMMA , combo_gamma );
-	
+
 		UpdateMenuLink(CNCL_INPUT_GAMMA, gamma_id);
 	}
 	EnableSignal();

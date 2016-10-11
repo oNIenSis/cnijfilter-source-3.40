@@ -93,9 +93,9 @@ void cnijnpr_sigchild_handler(int sig_code)
 
 /*** Functions ***/
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // main function
-// 
+//
 int main(gint argc, gchar *argv[])
 {
 /*** Parameters start ***/
@@ -103,7 +103,7 @@ int main(gint argc, gchar *argv[])
 	gchar			*pPrinterName = NULL;		// Printer name.
 	gint			retVal = ID_ERR_NO_ERROR;	// Return value.
 /*** Parameters end ***/
-	
+
 
 	// Argument check.
 	if (argc > 2) {
@@ -115,7 +115,7 @@ int main(gint argc, gchar *argv[])
 			// Get specified printer name.
 			pPrinterName = argv[1];
 		}
-		
+
 		// Init UI and more.
 		retVal = initApplication(argc, argv, pPrinterName);
 		if (retVal == ID_ERR_NO_ERROR) {
@@ -128,13 +128,13 @@ int main(gint argc, gchar *argv[])
 			outputCommandLineMessage(errorInfo.messageID);
 		}
 	}
-	
+
 	return(0);
 }// End main
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 // IN     : gint argc : Number of arguments.
 //          gchar *argv[] : Arguments.
@@ -142,7 +142,7 @@ int main(gint argc, gchar *argv[])
 // OUT    : None.
 // RETURN : ID_ERR_NO_ERROR : No error.
 //          other : Error occured.
-// 
+//
 PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 {
 /*** Parameters start ***/
@@ -190,10 +190,10 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 
 //	signal( SIGTERM, cnijnpr_sigterm_handler );
 	signal( SIGCHLD, cnijnpr_sigchild_handler );
-	
+
 	// Initialize printer status area.
 	initPrinterStatus(&gPrinterStatus);
-	
+
 	if (pPrinterName == NULL) {
 		// Printer name is not input. Get default printer name.
 		retVal = getDefaultPrinterName(gDestName, sizeof(gDestName));
@@ -225,7 +225,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 		}
 
 		for( i=0,j=0; i<(sizeof(tmp_modelname) - 1) ; i++){
-			if(tmp_modelname[i] == ' ') 
+			if(tmp_modelname[i] == ' ')
 				break;
 			else{
 				small_modelname[j] = tmp_modelname[i];
@@ -264,18 +264,18 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 	if( backend_Is == CANON_BJNP_BACKEND_CNIJ_NET ){
 		/* pipe create */
 		if( pipe(pipe_fds) < 0 )	return( -1 );
-	
+
 		g_pid = fork();
 	}
 	else{
 		g_pid = -2;
 		//g_pid = 1;
 	}
-	
+
 	if( g_pid  ==  -1 ){
 		return( -1 ) ;
 	}
-	
+
 	/* child process */
 	else if( g_pid == 0 ){
 
@@ -296,7 +296,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 		memset( argv_pipe, 0x00, sizeof(argv_pipe) ) ;
 		memset( argv_uri, 0x00, sizeof(argv_uri) ) ;
 		memset( username, 0x00, sizeof(username) ) ;
-		//printf("Child --%d\n", getpid());	
+		//printf("Child --%d\n", getpid());
 
 		sprintf( argv_pipe, "%d", pipe_fds[1] );
 
@@ -341,7 +341,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 		memset( buf, 0x00, sizeof(buf) ) ;
 
 		Odev.status = 0;
-		Odev.dev = 0;//device_type;	
+		Odev.dev = 0;//device_type;
 
 		if( backend_Is == CANON_BJNP_BACKEND_CNIJ_NET ){
 			//printf("parents process : --%d\n", getpid());
@@ -354,7 +354,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 		// Initialize printer status area.
 		initPrinterStatus(&gPrinterStatus);
 		/* for Network Ver.3.10 */
-		
+
 		if (retVal == ID_ERR_NO_ERROR) {
 			// Init GTK, Glade, etc.
 			bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
@@ -364,7 +364,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 
 #ifndef USE_libglade
 			SetGtkResourceDefault();
-#endif 
+#endif
 			gtk_set_locale();
 			gtk_init(&argc, &argv);
 
@@ -376,7 +376,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 			retVal = getProductName(gDestName, productName, modelIDstr);
 			//retVal = getProductName(gDestName, productName);
 			if (retVal == ID_ERR_NO_ERROR) {
-	
+
 /* Ver.3.20 move up */
 //				// check cngpijmonip4300 and ppd productName
 //				strncat(manufacture, STR_MANUFACTURER_NAME, strlen(STR_MANUFACTURER_NAME) );
@@ -387,9 +387,9 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 //					}
 //					tmp_modelname[j] = '\0';
 //				}
-//		
+//
 //				for( i=0,j=0; i<(sizeof(tmp_modelname) - 1) ; i++){
-//					if(tmp_modelname[i] == ' ') 
+//					if(tmp_modelname[i] == ' ')
 //						break;
 //					else{
 //						small_modelname[j] = tmp_modelname[i];
@@ -397,9 +397,9 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 //					}
 //					small_modelname[j] = '\0';
 //				}
-		
+
 				snprintf(module_name, sizeof(module_name), "%s%s",STR_APPLICATION_NAME, small_modelname);
-		
+
 				for( i=0; i<strlen(module_name) ; i++){
 					if( module_name[i] != *(argv[0]+i) ){
 						memset(productName, 0, sizeof(productName));
@@ -408,7 +408,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 					}
 				}
 				// check cngpijmonip4300 and ppd productName
-	
+
 				/* for Network Ver.3.10 */
 				if( (backend_Is == CANON_BJNP_BACKEND_CNIJ_NET) && (mismatch_flag != 1) ){
 					strncpy(windowTitle, productName, sizeof(windowTitle)-strlen(macaddress)-1 );
@@ -427,11 +427,11 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 					strncat(windowTitle, " ", strlen(" "));
 					strncat(windowTitle, STR_PRODUCT_NAME, strlen(STR_PRODUCT_NAME));
 				}
-	
+
 				// Check printer and job.
 				retVal = checkPrinterAndJobState(gDestName, &printerReady, &jobExist);
 				if (retVal == ID_ERR_NO_ERROR) {
-	
+
 					if ( (printerReady == FALSE) || (mismatch_flag == 1) ) {
 					//if (printerReady == FALSE) {
 						// Printer is not registerd in CUPS.
@@ -448,18 +448,18 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 							getPrinterStatus(gDestName, statusStr, sizeof(statusStr));
 							retVal = getPrinterStatus(gDestName, statusStr, sizeof(statusStr));
 							retVal = ID_ERR_PRINT_JOB_NOT_EXIST;
-	
+
 							if (retVal == ID_ERR_NO_ERROR) {
 								// Check status string.
 								if (strncmp(statusStr, STR_HEADER_STATUS_STRING, strlen(STR_HEADER_STATUS_STRING)) == 0) {
 									// Get printer status information.
 									retVal = translatePrinterStatus(statusStr, &gPrinterStatus);
 								}
-								
+
 								if (retVal == ID_ERR_NO_ERROR) {
 									// Init UI.
 									initUI(windowTitle, &gPrinterStatus, TRUE, -1);
-									
+
 									// Set calling timeout function.
 									//for Network Ver.3.10
 									gTimeoutFuncTag = gtk_timeout_add(TIMEOUT_CALL_UPDATE_UI_FUNC, (GtkFunction)updateUI, small_modelname);
@@ -476,7 +476,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 				strncat(windowTitle, STR_PRODUCT_NAME, strlen(STR_PRODUCT_NAME));
 			}
 		}
-		
+
 		if (retVal != ID_ERR_NO_ERROR) {
 			// Check error.
 			memset(&errorInfo, 0, sizeof(ST_ErrorCodeTbl));
@@ -487,7 +487,7 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 				if (retVal != ID_ERR_UNKNOWN_PRINTER) {
 					// Set calling timeout function.
 					//for Network Ver.3.10
-					if(backend_Is == CANON_USB_BACKEND_CNIJ_USB) 
+					if(backend_Is == CANON_USB_BACKEND_CNIJ_USB)
 						memset(small_modelname, 0, sizeof(small_modelname));
 					gTimeoutFuncTag = gtk_timeout_add(TIMEOUT_CALL_UPDATE_UI_FUNC, (GtkFunction)updateUI, small_modelname);
 					//gTimeoutFuncTag = gtk_timeout_add(TIMEOUT_CALL_UPDATE_UI_FUNC, (GtkFunction)updateUI, NULL);
@@ -503,12 +503,12 @@ PRIVATE gint initApplication(gint argc, gchar *argv[], gchar *pPrinterName)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PUBLIC void closeApplication(void)
 // IN     : None.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PUBLIC void closeApplication(void)
 {
 	// Free message ID area.
@@ -517,10 +517,10 @@ PUBLIC void closeApplication(void)
 		/* for GTK2 ver280 */
 		gPrinterStatus.pMessageID = NULL;
 	}
-	
+
 	// Free pixmaps of cartridge.
 	freePixmaps();
-	
+
 	// Stop calling timeout function.
 	if (gTimeoutFuncTag != 0) {
 		gtk_timeout_remove(gTimeoutFuncTag);
@@ -542,18 +542,18 @@ PUBLIC void closeApplication(void)
 	//g_signal = 1;
 
 		gtk_main_quit();
-	
+
 	return;
 }// End closeApplication
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PRIVATE gboolean updateUI(pPrinterName)
 // IN     : None.
 // OUT    : None.
 // RETURN : Always TRUE.
-// 
+//
 //for Network Ver.3.00
 PRIVATE gboolean updateUI(gchar *small_name)
 //PRIVATE gboolean updateUI(void)
@@ -582,7 +582,7 @@ PRIVATE gboolean updateUI(gchar *small_name)
 	//20090202 inistialize
 	memset( statusStr, 0x00, sizeof(statusStr) ) ;
 	Odev.status = 0;
-	Odev.dev = 0;//device_type;	
+	Odev.dev = 0;//device_type;
 
 	if (initTime == FALSE) {
 		initTime = TRUE;
@@ -656,7 +656,7 @@ PRIVATE gboolean updateUI(gchar *small_name)
 				if (strncmp(statusStr, STR_HEADER_STATUS_STRING, strlen(STR_HEADER_STATUS_STRING)) == 0) {
 					// Initialize printer status area.
 					initPrinterStatus(&printerStatus);
-					
+
 					/* for Network Ver.3.10 */
 					if( buf[0] == '#' )
 						printerStatus.user_otherflag = NETWORK_OTHER_USE;
@@ -668,27 +668,27 @@ PRIVATE gboolean updateUI(gchar *small_name)
 						// Enable [Cancel Printing] button.
 						//if (gPrinterStatus.printInterface == ID_DEV_1284 )
 						//	activateWidget(STR_MAIN_BUTTON_NAME_CANCEL, TRUE);
-			
+
 						// Check status changed or not.
-						
+
 						// Check cartridge class.
 						if (memcmp(printerStatus.cartridgeClass, gPrinterStatus.cartridgeClass, sizeof(ST_CartridgeClass) * 2) != 0) {
 							// Cartridge class changed. Update cartridge class area of UI.
 							ctChanged = TRUE;
 						}
-						
+
 						// Check lever position.
 						if (printerStatus.leverPosition != gPrinterStatus.leverPosition) {
 							// Lever position changed. Update lever position area of UI.
 							lpChanged = TRUE;
 						}
-						
+
 						// Check cartridge status.
 						if (memcmp(printerStatus.cartridgeStatus, gPrinterStatus.cartridgeStatus, sizeof(ST_InkStatus) * CARTRIDGE_COLOR_TYPE_NUM) != 0) {
 							// Cartridge status changed. Update cartridge pixmap area of UI.
 							chdChanged = TRUE;
 						}
-						
+
 						// Check number of messages.
 						if (printerStatus.messageNum != gPrinterStatus.messageNum) {
 							// Number of messages changed, then messages changed. Update messages area of UI.
@@ -705,10 +705,10 @@ PRIVATE gboolean updateUI(gchar *small_name)
 								msgChanged = TRUE;
 							}
 						}
-						
+
 						// Update UI.
 						updateUISettings(&printerStatus, ID_OTHER_MESSAGE_NONE, ctChanged, lpChanged, msgChanged, chdChanged);
-						
+
 						if (gPrinterStatus.pMessageID != NULL) {
 							free(gPrinterStatus.pMessageID);
 							gPrinterStatus.pMessageID = NULL;
@@ -719,7 +719,7 @@ PRIVATE gboolean updateUI(gchar *small_name)
 			}
 		}
 	}
-	
+
 	if (retVal != ID_ERR_NO_ERROR) {
 		// Check error.
 		memset(&errorInfo, 0, sizeof(ST_ErrorCodeTbl));
@@ -749,36 +749,36 @@ PRIVATE gboolean updateUI(gchar *small_name)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PRIVATE void initPrinterStatus(ST_PrinterStatus *pPrinterStatus)
 // IN     : ST_PrinterStatus *pPrinterStatus : Structure for printer status.
 // OUT    : None.
 // RETURN : None.
-// 
+//
 PRIVATE void initPrinterStatus(ST_PrinterStatus *pPrinterStatus)
 {
 	// Initialize printer status area.
 	memset(pPrinterStatus, 0, sizeof(ST_PrinterStatus));
 	memset(pPrinterStatus->cartridgeStatus, -1, sizeof(ST_InkStatus) * CARTRIDGE_COLOR_TYPE_NUM);
-	
+
 	return;
 }// End initPrinterStatus
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // CS     : PUBLIC void getErrorCodeInfo(gint errorCode, ST_ErrorCodeTbl *pErrorInfo)
 // IN     : gint errorCode : Error code.
 // OUT    : ST_ErrorCodeTbl *pErrorInfo : Information of error code.
 // RETURN : None.
-// 
+//
 PUBLIC void getErrorCodeInfo(gint errorCode, ST_ErrorCodeTbl *pErrorInfo)
 {
 /*** Parameters start ***/
 	guint	tableSize = sizeof(gErrorCodeTbl) / sizeof(ST_ErrorCodeTbl);	// Size of error code table.
 	guint	i = 0;		// Counter.
 /*** Parameters end ***/
-	
+
 	if (pErrorInfo != NULL) {
 		// Search error code table.
 		while (i < tableSize) {
@@ -790,18 +790,18 @@ PUBLIC void getErrorCodeInfo(gint errorCode, ST_ErrorCodeTbl *pErrorInfo)
 			i++;
 		}
 	}
-	
+
 	return;
 }// End getErrorCodeInfo
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PUBLIC void SetGtkResourceDefault()
 // IN     : None.
 // OUT    : None.
-// RETURN : pointer to default Resource file path 
-// 
+// RETURN : pointer to default Resource file path
+//
 PUBLIC void SetGtkResourceDefault()
 {
 //	gchar* home_dir = NULL;
@@ -815,9 +815,9 @@ PUBLIC void SetGtkResourceDefault()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PRIVATE void copy_buf2statusStr()
-// RETURN : OK or -1 
+// RETURN : OK or -1
 //
 PRIVATE void copy_buf2statusStr( char *bscc, ST_CUPSSTS *Pr_sts)
 {

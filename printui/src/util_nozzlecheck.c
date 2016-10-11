@@ -73,7 +73,7 @@ typedef struct {
 } NOZZLECHECKCOMPTYPE001RES, *LPNOZZLECHECKCOMPTYPE001RES;
 
 NOZZLECHECKCOMPTYPE001RES nozzleCheckType001Res[] = {
-	{ RES_NOZZLECHECK_COMPTYPE001, UI_CONFIRM_PATTERN_TYPE001, create_nozzle_check_type001_dialog }, 
+	{ RES_NOZZLECHECK_COMPTYPE001, UI_CONFIRM_PATTERN_TYPE001, create_nozzle_check_type001_dialog },
 };
 
 /* NOZZLECHECK COMPTYPE002 */
@@ -84,8 +84,8 @@ typedef struct {
 } NOZZLECHECKCOMPTYPE002RES, *LPNOZZLECHECKCOMPTYPE002RES;
 
 NOZZLECHECKCOMPTYPE002RES nozzleCheckType002Res[] = {
-	{ RES_NOZZLECHECK_COMPTYPE002, UI_NOZZLECHECK_START_TYPE001, create_nozzle_check_type002_dialog }, 
-	{ RES_NOZZLECHECK_COMPTYPE002, UI_NOZZLECHECK_START_TYPE002, create_nozzle_check_type002_dialog }, 
+	{ RES_NOZZLECHECK_COMPTYPE002, UI_NOZZLECHECK_START_TYPE001, create_nozzle_check_type002_dialog },
+	{ RES_NOZZLECHECK_COMPTYPE002, UI_NOZZLECHECK_START_TYPE002, create_nozzle_check_type002_dialog },
 };
 
 
@@ -220,7 +220,7 @@ static short GetNozzleCheckDataPath( char *inBuf, short inSize, short index, cha
 	int i;
 	short result = -1;
 
-	if ( modelName == NULL ) goto Err; 
+	if ( modelName == NULL ) goto Err;
 
 	for ( i	= 0; i<strlen(modelName); i++ ){
 		modelBuf[i] = LowerAsciiCode( modelName[i] );
@@ -236,10 +236,10 @@ static short GetNozzleCheckDataPath( char *inBuf, short inSize, short index, cha
 
 	size = (long)(p - buf);
 	if ( size > inSize ) goto Err;
-	memcpy( inBuf, buf, size ); 
+	memcpy( inBuf, buf, size );
 
 	result = 0;
-Err:	
+Err:
 	return result;
 }
 
@@ -256,7 +256,7 @@ static short SetPixMapNozzleCheckType000( GtkWidget *dialog )
 
 	gtk_widget_realize( dialog );
 	style = gtk_widget_get_style( dialog );
-	
+
 	/* draw ok pixmap */
 	if ( GetNozzleCheckDataPath( buf, CMD_BUF_MAX_SIZE, OK_CHECK_PATTERN, modelName ) != 0 ) goto Err;
 	map = gdk_pixmap_create_from_xpm( dialog->window, &iconMask, &style->bg[GTK_STATE_NORMAL], buf );
@@ -372,7 +372,7 @@ static short ExecNozzleCheckType001( void *lpWork, char *dialogName )
 	/* ---- Show Dialog ---- */
 	/* init parameter */
 	InitParamNozzleCheckType001( lpRes, gLPNozzleCheckWork );
-	
+
 	/* show labels */
 	SetLabelNozzleCheckType001( lpRes, gLPNozzleCheckWork, dialogName );
 
@@ -538,7 +538,7 @@ static short ExecNozzleCheckType002( void *lpWork, char *dialogName )
 	/* ---- Show Dialog ---- */
 	/* init parameter */
 	InitParamNozzleCheckType002( lpRes, gLPNozzleCheckWork );
-	
+
 	/* show labels */
 	SetLabelNozzleCheckType002( lpRes, gLPNozzleCheckWork, dialogName );
 
@@ -583,12 +583,12 @@ on_nozzle_check_type002_button001_clicked
                                         gpointer         user_data)
 {
 	LPNOZZLECHECKCOMPTYPE002WORK lpWk = (LPNOZZLECHECKCOMPTYPE002WORK)gLPNozzleCheckWork;
-	GtkWidget* window = GetTopWidget(GTK_WIDGET(button));	
+	GtkWidget* window = GetTopWidget(GTK_WIDGET(button));
 
 	if ( CheckWorkType002() != 0 ) goto Err;
 
 	if ( lpWk->uiType == UI_NOZZLECHECK_START_TYPE001 ){
-		lpWk->status = US_PRINT_CHECK_PATTERN;		
+		lpWk->status = US_PRINT_CHECK_PATTERN;
 	}
 	else if ( lpWk->uiType == UI_NOZZLECHECK_START_TYPE002 ){
 		gBinValueNozzleCheck = (short)GetActiveButtonIndex( window, nozzlecheck_type002_radiobutton_name, NOZZLECHECK_TYPE002_BINVALUE_CASETTE );

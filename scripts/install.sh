@@ -120,7 +120,7 @@ P_FUNC_show_copyright()
 	p_copyright3="All Rights Reserved."
 
 	echo $p_copyright1; echo $p_copyright2; echo $p_copyright3
-	
+
 }
 
 #################################################################
@@ -132,7 +132,7 @@ p_FUNC_is_network_model()
 	local p_local_cif_output=""
 	local p_local_cif_command=""
 	local p_local_ret
-	
+
 	p_local_modelname_cif=`echo $P_printer_device | sed -e "s/series$//"`
 	p_local_cif_command=cif$p_local_modelname_cif
 	p_local_cif_output=`$p_local_cif_command --supportnetwork 2>&1`
@@ -142,7 +142,7 @@ p_FUNC_is_network_model()
 	elif [ "$p_local_cif_output" = "0" ]; then
 		p_local_ret=0
 	fi
-	
+
 	return $p_local_ret
 }
 
@@ -157,8 +157,8 @@ p_FUNC_write_entrydata_to_file()
 
 	#to Upper case
 	p_local_name_to_write=`echo "$2" | tr a-z A-Z`
-	
-	
+
+
 	# set delimiter
 	IFS='
 	'
@@ -169,7 +169,7 @@ p_FUNC_write_entrydata_to_file()
 		if [ -n "$line" ]; then
 			#to Upper case
 			line=`echo "$line" | tr a-z A-Z`
-			
+
 			if [ "$p_local_name_to_write" = "$line" ]; then
 				# same name exist in the entry_list_file -> restore delimiter and return.
 				IFS=$IFS_ORG
@@ -184,9 +184,9 @@ p_FUNC_write_entrydata_to_file()
 	# add
 	local p_local_entry="'"$2"'"
 	${P_printer_sudo_command}sh -c "echo $p_local_entry >> $1"
-	
+
 	return 0
-	
+
 }
 
 #################################################################
@@ -224,14 +224,14 @@ p_FUNC_delete_entryname_from_file()
 			if [ -n "$line" ]; then
 				#to Upper case
 				upper_val=`echo "$line" | tr a-z A-Z`
-				
+
 				if [ "$p_local_target_name" = "$upper_val" ]; then
 					p_local_out_flg=1
 					continue
 				else
 					p_local_list_of_entries=${p_local_list_of_entries}${line}"\n"
 				fi
-			fi	
+			fi
 		done
 
 		# add
@@ -247,19 +247,19 @@ p_FUNC_delete_entryname_from_file()
 	# restore delimiter.
 	IFS=$IFS_ORG
 
-	return 0	
+	return 0
 
 }
 
 #################################################################
-#### Exec command for printer  $1:command to exec  $2:1..show execution command 
+#### Exec command for printer  $1:command to exec  $2:1..show execution command
 #################################################################
 p_FUNC_show_and_exec_printer()
 {
 	if [ $2 -eq 1 ]; then
 		printf "$L_INST_COM_01_01" "$1"
 	fi
-	
+
 	$1 1> /dev/null		#show error message only
 	return $?
 }
@@ -276,7 +276,7 @@ p_FUNC_get_cupsd_command()
 		P_cupsd_command_current=${P_printer_sudo_command}$P_cupsd_command_1
 		return 0
 	fi
-	
+
 	#-----------------------------
 	# Check "/etc/init.d/cupsys"
 	#-----------------------------
@@ -284,7 +284,7 @@ p_FUNC_get_cupsd_command()
 		P_cupsd_command_current=${P_printer_sudo_command}$P_cupsd_command_2
 		return 0
 	fi
-	
+
 	return 127	#error
 
 }
@@ -301,7 +301,7 @@ p_FUNC_get_lpadmin_command()
 		P_lpadmin_command_current=${P_printer_sudo_command}$P_lpadmin_command_full
 		return 0
 	fi
-	
+
 	#-----------------------------
 	# Get fullpath by "whereis" and check it.
 	#-----------------------------
@@ -311,16 +311,16 @@ p_FUNC_get_lpadmin_command()
 	if [ -z "$lpadmin_path" ]; then
 		lpadmin_path=`echo ${lpadmin_path_tmp} | cut -d\t -f2`
 	fi
-	
+
 	if [ "$lpadmin_path" ]; then
 		if [ -f "$lpadmin_path" ]; then
 			P_lpadmin_command_current=${P_printer_sudo_command}$lpadmin_path
 			return 0
 		fi
 	fi
-	
+
 	return 127	#error
-	
+
 }
 
 #################################################################
@@ -347,7 +347,7 @@ p_FUNC_check_yes_no()
 		esac
 
 	done
-	
+
 	return $p_local_result
 }
 
@@ -367,7 +367,7 @@ p_FUNC_make_default_entryname()
 			p_local_entry_name=$1"-"$p_local_count
 		fi
 		p_FUNC_check_entry_exist $p_local_entry_name
-		
+
 		if [ $? -ne 0 ]; then
 			p_local_result=""
 		else
@@ -375,12 +375,12 @@ p_FUNC_make_default_entryname()
 		fi
 		#
 		p_local_count=`expr $p_local_count + 1`
-		
+
 	done
-	
+
 #	echo $p_local_result
 	P_DEF_ENTRYNAME=$p_local_result
-	
+
 #	return 0
 }
 
@@ -395,7 +395,7 @@ p_FUNC_check_entry_exist()
 	#-----------------------------
 #	local p_local_entry="'"$1"'"
 	cngpij --checkentryexist "$1" >& /dev/null
-	
+
 	if [ $? -eq 0 ]; then		#exist
 		return 1
 	fi
@@ -410,7 +410,7 @@ p_FUNC_check_entry_exist()
 p_FUNC_is_valid_entry_name()
 {
 	local p_local_tmpname=""
-	
+
 	p_local_tmpname="$1"
 
 	case "$p_local_tmpname" in
@@ -419,7 +419,7 @@ p_FUNC_is_valid_entry_name()
 		*)
 			return 1;;	#OK
 	esac
-	
+
 }
 
 #################################################################
@@ -444,7 +444,7 @@ p_FUNC_make_printer_list_from_backenddata()
 
 	# P_DEF_ENTRYNAME:all uppercase..
 	p_local_current_model=$P_DEF_ENTRYNAME
-	
+
 	# show message...
 	printf "\n"
 	printf "$L_INST_PRN_01_08"
@@ -482,17 +482,17 @@ p_FUNC_make_printer_list_from_backenddata()
 	for line in ${p_local_srch_result}; do
 		line=`echo -n ${line}`
 		line=${line//\"/\\\"}
-	
+
 		# Extract the 3rd field("Canon MX320 series") and set to value.
 		value=`perl -e '"'$line'" =~ /\"(Canon.+?)\"/;print $1'`
-		
+
 		# Skip FAX device
 		p_local_fax_term=""
 		p_local_fax_term=`perl -e '"'$value'" =~ /(FAX)/;print $1'`
 		if [ "$p_local_fax_term" ]; then
 			continue
 		fi
-		
+
 		# Extract the 2nd field(/00-1E-8F-0E-1D-44) and set to dvice_uri.
 		p_local_cn_uri=`echo ${line} | cut -d' ' -f2`
 		p_local_dvice_uri=`echo ${p_local_cn_uri} | cut -d':' -f2`
@@ -500,39 +500,39 @@ p_FUNC_make_printer_list_from_backenddata()
 		# If the I/F is LAN, delete "/" and add IPP address.
 		if [ "$1" = "cnijnet" ]; then
 			p_local_dvice_uri=`echo ${p_local_dvice_uri} | cut -d'/' -f2`
-			
+
 			p_local_ip_add=`perl -e '"'$line'" =~ /\"(IP.+)\"/;print $1'`
 			p_local_ip_add=`echo $p_local_ip_add | sed -e "s/^IP://" `	#new
-			
+
 			p_local_dvice_uri=$p_local_dvice_uri" "$p_local_ip_add
-			
+
 		fi
 
 		if [ "${value}" != "" ]; then
 			p_local_current=`echo ${value} | cut -d' ' -f2`
 			p_local_current_upper=`echo $p_local_current | tr a-z A-Z`
-			
+
 			if [ "${p_local_current_upper}" = "${p_local_current_model}" ]; then	# If target model..
-				
+
 				P_target_model_num=`expr $P_target_model_num + 1`	# arrya number starts with "1".
 				p_local_display_line="${P_target_model_num}) ${value} (${p_local_dvice_uri})"
 				P_target_model_list[P_target_model_num]=$p_local_display_line
-			
+
 			else											# If other model...
 				P_other_model_num=`expr ${P_other_model_num} + 1`		# arrya number starts with "101".
 				p_local_display_line="`expr $P_other_model_num + 100`) ${value} (${p_local_dvice_uri})"
 				P_other_model_list[P_other_model_num]=$p_local_display_line
-			
+
 			fi
 		fi
 	done
-	
+
 	# restore delimiter
 	IFS=$IFS_ORG
-	
+
 #	echo "P_target_model_num=$P_target_model_num"
 #	echo "P_other_model_num=$P_other_model_num"
-	
+
 }
 
 #################################################################
@@ -540,7 +540,7 @@ p_FUNC_make_printer_list_from_backenddata()
 #################################################################
 p_FUNC_select_printer_from_list()
 {
-	
+
 	P_ans=''
 	local p_local_defaultnum
 	local p_local_target_list_title
@@ -557,7 +557,7 @@ p_FUNC_select_printer_from_list()
 	else
 		p_local_defaultnum=1
 	fi
-	
+
 	# Set list titles according to backend name.
 	if [ "$1" = "cnijusb" ]; then
 		p_local_target_list_title="$L_INST_PRN_01_14"
@@ -579,7 +579,7 @@ p_FUNC_select_printer_from_list()
 	printf -- "-----------------------------------------------------------\n"
 	printf " 0) $L_INST_PRN_01_11\n"
 	printf -- "-----------------------------------------------------------\n"
-    
+
     if [ $P_target_model_num -gt 0 ]; then
     	printf "$p_local_target_list_title"
 #		for current in ${P_target_model_list[@]}; do
@@ -614,13 +614,13 @@ p_FUNC_select_printer_from_list()
 	#-----------------------------
 	if [ $p_local_defaultnum -eq 0 ]; then
 		printf "$L_INST_PRN_01_16" "[0]" "$L_INST_PRN_01_11" > /dev/stderr
-	
+
 	else
 		tmp_selected=${P_target_model_list[${p_local_defaultnum}]}
 		tmp_selected=`echo $tmp_selected | cut -d " " -f 2-`
 		printf "$L_INST_PRN_01_16" "[1]" "$tmp_selected" > /dev/stderr
 	fi
-	
+
 
 	#-----------------------------
 	# Loop until valid selection is done...
@@ -630,7 +630,7 @@ p_FUNC_select_printer_from_list()
 	IFS='
 '
 	while [ -z "${P_ans}" ]; do
-		
+
 		# Please select...
 		printf "$L_INST_PRN_01_17 [${p_local_defaultnum}]" > /dev/stderr
 		IFS=$IFS_ORG
@@ -642,11 +642,11 @@ p_FUNC_select_printer_from_list()
 		if [ "${p_local_indata}" = "" ] ; then
 			p_local_indata=${p_local_defaultnum}
 		fi
-		
+
 		# Check the inputted data.
 		#to Upper case
 		p_local_indata=`echo $p_local_indata | tr a-z A-Z`
-		
+
 		case "$p_local_indata" in
 
 			# "0"(re-search) -> return 0 immediately
@@ -664,12 +664,12 @@ p_FUNC_select_printer_from_list()
 			*[^0-9]*)
 				# contain characters other than number(0-9).-> invaild -> back to input step.
 				P_ans='';;
-				
+
 			*)
 				# valid -> go to next step.
 				# Verify inputted value
 				# Check if the choice is target model or not.
-				
+
 				if [ "${p_local_indata}" -ge 1 -a "${p_local_indata}" -le 100 ] 2> /dev/null; then	#1-100: target model
 					if [ "${p_local_indata}" -ge 1 -a "${p_local_indata}" -le "${P_target_model_num}" ] 2> /dev/null; then
 						P_ans=${P_target_model_list[${p_local_indata}]}
@@ -686,9 +686,9 @@ p_FUNC_select_printer_from_list()
 				fi
 		esac
 	done
-	
+
 	#echo "select num is ${P_ans}"
-	
+
 	# restore delimiter and return.
 	IFS=$IFS_ORG
 	return 0
@@ -705,10 +705,10 @@ p_FUNC_make_uri()
 	'
 #	echo "choice=$2"
 	local p_local_uri=""
-	
+
 	# Extract "00-00-85-CE-9B-17 172.21.81.49"or"/dev/usb/lp0"
 	p_local_uri=`perl -e '"'$2'" =~ /\((.+)\)/;print $1'`
-	
+
 	# If I/F is LAN: "00-00-85-CE-9B-17 172.21.81.49" -> "00-00-85-CE-9B-17" -> "/00-00-85-CE-9B-17"
 	if [ "$1" = "cnijnet" ]; then	#LAN
 		p_local_uri=`echo $p_local_uri | cut -d' ' -f1`
@@ -719,7 +719,7 @@ p_FUNC_make_uri()
 #	echo P_current_uri="$P_current_uri"
 	# restore delimiter
 	IFS=$IFS_ORG
-	
+
 }
 
 #################################################################
@@ -731,9 +731,9 @@ P_FUNC_MAIN_make_queue()
 
 	#echo ""
 	#echo "## Driver packages installed. ##"
-	
+
 	P_printer_device=$2
-	
+
 	# make P_printer_sudo_command
 	if [ "$3" = "rpm" ]; then
 		P_printer_sudo_command=""
@@ -761,15 +761,15 @@ P_FUNC_MAIN_make_queue()
 		exit		#quit immediately
 	fi
 #	echo "cups=$P_cupsd_command_current"
-	
+
 	p_FUNC_get_lpadmin_command
 	if [ $? -ne 0 ]; then
 		printf "$L_INST_PRN_01_27"
 		exit		#quit immediately
 	fi
 #	echo "lpadmin=$P_lpadmin_command_current"
-	
-	
+
+
 	####################################
 	### Registration start
 	####################################
@@ -781,7 +781,7 @@ P_FUNC_MAIN_make_queue()
 	printf "$L_INST_PRN_01_03"
 	echo -n "> "
 	read CMD
-	
+
 	####################################
 	### Restart cupsd. -> moved to "p_FUNC_make_printer_list_from_backenddata" (just before device detection)
 	####################################
@@ -811,7 +811,7 @@ P_FUNC_MAIN_make_queue()
 		while [ -z "$p_local_I_F" ]; do
 			printf "$L_INST_PRN_01_07" "[1]"
 			read -r CMD
-		
+
 			case $CMD in
 				"")	#USB
 					p_local_BACKENDNAME="cnijusb"
@@ -824,12 +824,12 @@ P_FUNC_MAIN_make_queue()
 					p_local_I_F="LAN";;
 			esac
 		done
-		
+
 	else
 		#Skip I/F select step
 		p_local_BACKENDNAME="cnijusb"
 	fi
-	
+
 
 	####################################
 	### Search printer devices and show list.
@@ -876,13 +876,13 @@ P_FUNC_MAIN_make_queue()
 	### Make default name
 	# P_DEF_ENTRYNAME + I/F
 	P_DEF_ENTRYNAME=$P_DEF_ENTRYNAME$p_local_I_F
-	
+
 	# Make default(pre-set) entry name.
 	p_FUNC_make_default_entryname $P_DEF_ENTRYNAME
-	
+
 	local p_local_ENTRYNAME=""
 	local p_local_remake_flag=0
-	
+
 	printf "\n"
 	printf "#=========================================================#\n"
 	printf "#  $L_INST_PRN_01_19"
@@ -892,44 +892,44 @@ P_FUNC_MAIN_make_queue()
 		p_local_ENTRYNAME=""
 		printf "$L_INST_PRN_01_20[$P_DEF_ENTRYNAME]"
 		read -r p_local_ENTRYNAME
-		
+
 		case "$p_local_ENTRYNAME" in
 			"")		# use default name
 				p_local_ENTRYNAME=$P_DEF_ENTRYNAME;;
 		esac
-		
+
 		# Check if specified name is valid.
 		p_FUNC_is_valid_entry_name "$p_local_ENTRYNAME"
 
 		if [ $? -eq 0 ]; then		# invalid printer name
 			printf "$L_INST_PRN_01_22"
 			p_local_ENTRYNAME=""
-			echo ""	
+			echo ""
 			continue
 		fi
-		
-		
+
+
 		# Check if the specified name is already exist.
 		p_FUNC_check_entry_exist $p_local_ENTRYNAME
-		
+
 		if [ $? -ne 0 ]; then
 			#If the entry_name exists, ask if overwrite or not.
 			p_FUNC_check_yes_no "$L_INST_PRN_01_21"
-			
+
 			if [ $? -eq 0 ]; then		#No -> back to input step
 				p_local_ENTRYNAME=""
-				echo ""	
+				echo ""
 			else						#Yes-> set "p_local_remake_flag" 1
 				p_local_remake_flag=1
 			fi
 		else
 			:
 		fi
-		
+
 	done
-	
+
 	local p_local_PPDNAME=canon$p_local_SHOTMODELNAME.ppd
-	
+
 	####################################
 	### Excute lpadmin (registration)
 	####################################
@@ -943,7 +943,7 @@ P_FUNC_MAIN_make_queue()
 		# delete entry from file
 		p_FUNC_delete_entryname_from_file "$p_local_ENTRYNAME"
 	fi
-	
+
 	p_FUNC_show_and_exec_printer "$P_lpadmin_command_current -p $p_local_ENTRYNAME -m $p_local_PPDNAME -v $p_local_BACKENDNAME:$P_current_uri -E" 1
 	if [ $? -ne 0 ]; then
 		printf "$L_INST_PRN_01_27"
@@ -966,16 +966,16 @@ P_FUNC_MAIN_make_queue()
 	printf "#=========================================================#\n"
     printf "#  $L_INST_PRN_01_23"
 	printf "#=========================================================#\n"
-	
+
 	p_FUNC_check_yes_no "$L_INST_PRN_01_24"
-	
+
 	if [ $? -eq 1 ]; then
 		p_FUNC_show_and_exec_printer "$P_lpadmin_command_current -d $p_local_ENTRYNAME" 0
 		if [ $? -ne 0 ]; then
 			printf "$L_INST_PRN_01_27"
 			exit		#quit immediately
 		fi
-		
+
 	fi
 
 	####################################
@@ -993,9 +993,9 @@ P_FUNC_MAIN_make_queue()
 	### Add the entry name to the "entry_list" file.(not to add if the entry is overwrited)
 	####################################
 	p_FUNC_write_entrydata_to_file "$P_entry_list_fullname" $p_local_ENTRYNAME
-	
+
 	return 0
-	
+
 }
 
 #################################################################
@@ -1015,24 +1015,24 @@ P_FUNC_MAIN_delete_all_queue()
 	else
 		P_entry_list_path=${P_entry_list_path_deb}${P_entry_list_dir}
 	fi
-	
+
 	p_FUNC_check_yes_no "$L_INST_PRN_02_03"
 	if [ $? -eq 0 ]; then		#No
 		exit		#quit immediately (say nothing)
-	
+
 	else						#Yes
-	
+
 		# initialize
 		local p_local_existentrys=""
 		local p_local_entrys_to_delete
 		local p_local_entrys_to_delete_num=0
-		
+
 		#-----------------------------
 		# Prepare file names and Get entry list file.
 		#-----------------------------
 		P_printer_device="$1"
 #		echo P_printer_device=$P_printer_device
-		
+
 		P_entry_list_fullname=$P_entry_list_path${P_entry_list_name}_${P_printer_device}
 #		echo P_entry_list_fullname=$P_entry_list_fullname
 		if [ -f "$P_entry_list_fullname" ]; then
@@ -1047,14 +1047,14 @@ P_FUNC_MAIN_delete_all_queue()
 			IFS=$IFS_ORG
 			return 1		#skip and go to remove package
 		fi
-		
+
 		# make P_printer_sudo_command
 		if [ "$2" = "rpm" ]; then
 			P_printer_sudo_command=""
 		else
 			P_printer_sudo_command="sudo "
 		fi
-		
+
 
 		#-----------------------------
 		# prepare for command...
@@ -1074,7 +1074,7 @@ P_FUNC_MAIN_delete_all_queue()
 		fi
 #		echo "lpadmin=$P_lpadmin_command_current"
 
-		
+
 		#-----------------------------
 		# make array of entrys to delete.
 		#-----------------------------
@@ -1084,11 +1084,11 @@ P_FUNC_MAIN_delete_all_queue()
 				p_local_entrys_to_delete_num=`expr $p_local_entrys_to_delete_num + 1`
 			fi
 		done
-		
+
 		# restore delimiter
 		IFS=$IFS_ORG
-		
-		
+
+
 		#-----------------------------
 		# delete entry for each line.
 		#-----------------------------
@@ -1101,7 +1101,7 @@ P_FUNC_MAIN_delete_all_queue()
 				fi
 			fi
 		}
-		
+
 #		for line in ${p_local_existentrys}; do
 #			if [ -n "$line" ]; then	# skip blank line
 #				p_FUNC_show_and_exec_printer "$P_lpadmin_command_current -x $line" 1
@@ -1111,21 +1111,21 @@ P_FUNC_MAIN_delete_all_queue()
 #				fi
 #			fi
 #		done
-		
+
 		#-----------------------------
 		# Remove entry_list file.
 		#-----------------------------
 		${P_printer_sudo_command}rm -f $P_entry_list_fullname
 		${P_printer_sudo_command}rmdir -p --ignore-fail-on-non-empty $P_entry_list_path
-		
+
 	fi
-	
+
 	return 0
-	
+
 }
 
 #== test program ====================================
-# 
+#
 #L_INST_01_24="Installation has been completed."
 #L_INST_02_04="Uninstallation has been completed."
 #argment=$1
@@ -1180,7 +1180,7 @@ C_FUNC_version_comp()
 	local c_reln1=""
 	local c_rela2=""
 	local c_reln2=""
-	
+
 	C_FUNC_makelist()
 	{
 		echo $1
@@ -1200,7 +1200,7 @@ C_FUNC_version_comp()
 	elif [ $c_ver1 -lt $c_ver2 ]; then
 		return $C_small
 	fi
-	
+
 	## release compare ##
 	# ex. a13->[a][13], 2->[][2] #
 	c_tmpstr=`echo ${1##*-}`
@@ -1216,7 +1216,7 @@ C_FUNC_version_comp()
 	elif [ -n $c_rela1 ] && [ -z $c_rela2 ]; then
 		return $C_small
 	fi
-	
+
 	# ex. [a][2] < [b][1] #
 	if [ -n $c_rela1 ] && [ $c_rela1 != $c_rela2 ]; then
 		list=`C_FUNC_makelist $c_rela1 $c_rela2 | sort`
@@ -1228,7 +1228,7 @@ C_FUNC_version_comp()
 			fi
 		done
 	fi
-	
+
 	# ex. [a][2] > [a][1], [b][9] < [b][10] #
 	if [ $c_reln1 -gt $c_reln2 ]; then
 		return $C_big
@@ -1267,7 +1267,7 @@ C_FUNC_get_system()
 			C_arch64="amd64"
 		fi
 	fi
-	
+
 	return 0
 }
 
@@ -1333,8 +1333,8 @@ C_FUNC_get_bitconf()
 		printf "$L_INST_COM_01_05"
 		printf "\n  ${c_sudo_command}${0} ${C_arg_inst}\n\n"
 		return $C_ERR_CODE
-	fi	
-	
+	fi
+
 	return 0
 }
 
@@ -1377,7 +1377,7 @@ C_FUNC_localize()
 			source ${lc_file_dir}/${lc_file}
 		fi
 	fi
-	
+
 	return 0
 }
 
@@ -1461,7 +1461,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 		if [ $filename != $C_pkg_path ]; then
 			# Count number of C_files           #
 			C_file_cnt=`expr $C_file_cnt + 1`
-			
+
 			# Get only file name              #
 			C_onlyfname=`echo ${filename##*/}`
 			# Check the extension, and the filename for module #
@@ -1517,7 +1517,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 		local c_pkg_name=$2
 		local c_exec_update=1
 		local c_installed_pkg=""
-		
+
 		## result -> 0:Package installed, 1:Package not installed ##
 		c_installed_pkg=`rpm -q $c_pkg_name`
 		if [ $? -eq 0 ]; then
@@ -1539,7 +1539,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 			C_FUNC_show_and_exec "rpm --test -U $c_fpath_pkg_name"
 		fi
 
-		return 0	
+		return 0
 	}
 
 	C_FUNC_deb_install_process()
@@ -1551,7 +1551,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 		if [ $? != 0 ]; then
 			return $C_ERR_CODE
 		fi
-		
+
 		return 0
 	}
 
@@ -1624,7 +1624,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 		C_uninstall_command="rpm -e"
 		C_script_path=$C_config_path_rpm
 		C_sudo_command=""
-		
+
 		##  Check permission by root ##
 		if test `id -un` != "root"; then
 			su -c "$0 $C_argment"
@@ -1645,7 +1645,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 		fi
 		exit
 	fi
-		
+
 	## Depend-Package install process ##
 	$C_install_process $C_fpath_depend $C_main_module-$C_device
 	if [ $? -ne 0 ]; then
@@ -1655,7 +1655,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 		C_FUNC_show_and_exec "$C_uninstall_command $C_pkgname_common"
 		exit
 	fi
-		
+
 	C_pkgconfig_fname=$C_main_module-$C_device-pkgconfig.sh
 	C_pkgconfig_dname=${C_pkgconfig_fname%%\.sh}
 	$C_pkgconfig_fname --pkgconfig 1> /dev/null 2>&1
@@ -1671,7 +1671,7 @@ if [ ${0##*/} = $C_install_script_fname ]; then
 			C_FUNC_copy_lcfile $C_local_path_inst $C_pkgconfig_dname $C_sudo_command
 		fi
 	fi
-	
+
 	$C_function01 "$L_INST_COM_01_04" "$C_device" "$C_system"
 
 ##########################################################
@@ -1717,7 +1717,7 @@ else
 	### Unistall process ###
 	########################
 	if [ $C_argment = "--uninstall" ]; then
-	
+
 		C_FUNC_rpm_uninstall_process()
 		{
 			rpm -q $1 1> /dev/null 2>&1
@@ -1743,14 +1743,14 @@ else
 				# Dependency error #
 				return $C_ERR_CODE
 			fi
-			
+
 			return 0
 		}
 
 		if [ $C_system = "rpm" ]; then
 			C_uninstall_process="C_FUNC_rpm_uninstall_process"
 			C_sudo_command=""
-			
+
 			##  Check permission by root ##
 			if test `id -un` != "root"; then
 				su -c "$0 $C_argment"
@@ -1780,7 +1780,7 @@ else
 			C_lcfile_path="/usr/share/${C_pkgconfig}"
 		fi
 		$C_sudo_command rm -rf $C_lcfile_path
-		
+
 		##  Uninstall Common-Package ##
 		$C_uninstall_process $C_main_module-$C_common
 
@@ -1794,15 +1794,15 @@ else
 	    #########################
 		### Judge 32bit/64bit ###
 	    #########################
-		 
+
 		C_FUNC_get_bitconf version
 		if [ $? -eq $C_ERR_CODE ]; then
 			exit
 		fi
-				
+
 		echo ; $C_function03 "$C_version"
 		printf "\n$L_INST_COM_03_01"
-		
+
 		if [ $C_system = "rpm" ]; then
 			echo $C_main_module-$C_common-$C_version.$C_arch.$C_system
 			echo $C_main_module-$C_device-$C_version.$C_arch.$C_system

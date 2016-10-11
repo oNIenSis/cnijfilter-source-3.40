@@ -132,10 +132,10 @@ int ShowMediaTypeDialog(UIMediaTypeDialog* dialog,
 		/* Ver.2.80*/
 		SetGListToComboBox(UI_DIALOG(dialog)->window, "mediatype_dialog_combo",
 						media_list, media_list->data , CNCL_MEDIATYPE);
-		
+
 	}
 
-	ShowDialog((UIDialog*)dialog, "mediatype_dialog_ok_button"); 
+	ShowDialog((UIDialog*)dialog, "mediatype_dialog_ok_button");
 
 	return dialog->apply? dialog->selected_media : -1;
 }
@@ -146,7 +146,7 @@ void HideMediaTypeDialog(UIMediaTypeDialog* dialog, gboolean apply)
 	{
 		/* Ver.2.80 */
 		GtkWidget* combo = LookupWidget( UI_DIALOG(dialog)->window , "mediatype_dialog_combo" );
-		dialog->selected_media = NameToValue(CNCL_MEDIATYPE, 
+		dialog->selected_media = NameToValue(CNCL_MEDIATYPE,
 								(char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo)) );
 	}
 

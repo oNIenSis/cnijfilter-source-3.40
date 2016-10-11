@@ -53,7 +53,7 @@ typedef struct
 	int item_count;
 //	short item_value[RECOMMEND_ITEM_NUM];		/* delete(Ver.3.20) */
 	short current_change_to_id;		/* Ver.3.20 */
-	
+
 } UIMediaSizeDialog;
 
 UIMediaSizeDialog* CreateMediaSizeDialog(

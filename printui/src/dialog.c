@@ -93,7 +93,7 @@ void RestoreDialog(UIDialog* dialog)
 		memcpy(dialog, dialog->save, dialog->size);
 }
 
-void ShowDialog(UIDialog* dialog, gchar* default_widget) 
+void ShowDialog(UIDialog* dialog, gchar* default_widget)
 {
 	gint sw, sh;
 	gint px, py;
@@ -120,7 +120,7 @@ void ShowDialog(UIDialog* dialog, gchar* default_widget)
 		oy = (ph - ch) / 2;
 		if( oy < 20 )	oy = 20;
 
-		if( px + ox + cw > sw ) 
+		if( px + ox + cw > sw )
 			ox = sw - cw - px - 20;
 
 		if( py + oy + ch > sh )
@@ -149,7 +149,7 @@ void ShowDialog(UIDialog* dialog, gchar* default_widget)
 	gtk_main();
 }
 
-void HideDialog(UIDialog* dialog) 
+void HideDialog(UIDialog* dialog)
 {
 	gint pos_x, pos_y;
 	gdk_window_get_root_origin(dialog->window->window, &pos_x, &pos_y);

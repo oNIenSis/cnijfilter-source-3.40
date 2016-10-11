@@ -156,8 +156,8 @@ int ModelNameToID(char* name)
 
 	strcpy(upname, name);
 
-	// Because the display trouble was found by tr_TR.ISO8859-9, 
-	// g_strup() is replaced with UpperAsciiStr(). 
+	// Because the display trouble was found by tr_TR.ISO8859-9,
+	// g_strup() is replaced with UpperAsciiStr().
 	UpperAsciiStr(upname);	//	g_strup(upname);
 
 	while( g_model_key[i] != NULL )
@@ -307,7 +307,7 @@ short GetCurrentInkCartridgeSettings()
 	/* CND_CARTRIDGE_BK */
 	if( media_type == CND_MEDIA_PLAIN && margin_type == CND_MARGIN_NORMAL )
 		return cartridge;
-	
+
 //	return CND_CARTRIDGE_BK_COLOR;
 	/* Ver.2.70 : Use default value */
 	cartridge = GetDefaultnValue(CNCL_INKCARTRIDGESETTINGS);
@@ -802,11 +802,11 @@ static int GetCallbackTableNum(void)
 static void SetCallbackTableOldValue(void)
 {
 	int i;
-	
+
 	for(i=0; callback_table[i].func != NULL; i++ ){
-		callback_table[i].old_value = 
+		callback_table[i].old_value =
 			GetCurrentnValue(callback_table[i].id);
-	   
+
 	}
 
 }
@@ -814,9 +814,9 @@ static void SetCallbackTableOldValue(void)
 static void CompCallbackTableValue(void)
 {
 	int i;
-		
+
 	for(i=0; callback_table[i].func != NULL; i++ ){
-		if(callback_table[i].old_value != 
+		if(callback_table[i].old_value !=
 					GetCurrentnValue(callback_table[i].id) ){
 			callback_table[i].func(callback_table[i].func_data);
 		}
@@ -829,15 +829,15 @@ int SetCallbackTableFunc(short id, void (*func)(void *arg), void* func_data)
 {
 
 	int table_num;
-	
+
 	if( (table_num=GetCallbackTableNum()) != -1){
 		callback_table[table_num].id = id;
 		callback_table[table_num].func = func;
 		callback_table[table_num].func_data = func_data;
-		
+
 		return 0;
 	}
-		
+
 	return -1;
 }
 
@@ -869,7 +869,7 @@ int UpdateMenuLink(short id, short value)
 
 	/*Ver.2.70: Replace "CND_SUPPLY_FRONT_FOR_PLAIN" with "CND_SUPPLY_ASF" before MenuLink */
 	if( id == CNCL_MEDIASUPPLY &&  value == CND_SUPPLY_FRONT_FOR_PLAIN ) value = CND_SUPPLY_ASF;
-	
+
 
 	/* Ver.2.70: Store toggle status of "Duplex Printing" */
 	if(g_main_window){
@@ -882,7 +882,7 @@ int UpdateMenuLink(short id, short value)
 
 	if( GetCallbackTableNum() )
 		SetCallbackTableOldValue();
-	
+
 	/* Save all low level values. */
 	SaveIDValue(id, CNCL_MEDIATYPE, &media_type);
 	SaveIDValue(id, CNCL_GRAYSCALE, &gray_scale);
@@ -952,7 +952,7 @@ int UpdateMenuLink(short id, short value)
 #endif
 		if(g_quality_dialog) SetQualityCustomValue(g_quality_dialog);
 	}
-	
+
 	if( GetCallbackTableNum() )
 		CompCallbackTableValue();
 

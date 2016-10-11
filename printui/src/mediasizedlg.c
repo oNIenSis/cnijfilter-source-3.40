@@ -261,7 +261,7 @@ int ShowMediaSizeIllegalDialog(UIMediaSizeDialog* dialog, gchar* applied)
 	{
 		// Display recommended paper size.
 		dialog->current_change_to_id = KeyToValue(CNCL_PAPERSIZE, applied);		/* Ver.3.20:default current...set top item */
-		
+
 		dialog->item_count = 1;
 
 		size = ValueToName(CNCL_PAPERSIZE, dialog->current_change_to_id);	/* Ver.3.20 */
@@ -279,9 +279,9 @@ int ShowMediaSizeIllegalDialog(UIMediaSizeDialog* dialog, gchar* applied)
 	gtk_label_set_text(GTK_LABEL(recommend_media_label), media);
 
 	gtk_window_set_title(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);
 	gtk_window_set_position(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);
 
 	ShowDialog((UIDialog*)dialog, "mediasize_illegal_apply_button");
 	return dialog->exec;
@@ -378,11 +378,11 @@ fprintf(stderr,"ShowMediaSizeRecommendDialog:4\n");
 		g_free(message);
 
 		dialog->current_change_to_id = KeyToValue(change_id, applied);		/* Ver.3.20:default current...set top item */
-		
+
 		/* Ver.3.20: 1 item -> Hide combo */
 		gtk_widget_hide( GTK_WIDGET( LookupWidget(UI_DIALOG(dialog)->window, "mediasize_recommend_combo" ) ) );
-		
-		
+
+
 	}
 
 	// In case of changing more than 1 recommended items.
@@ -394,7 +394,7 @@ fprintf(stderr,"ShowMediaSizeRecommendDialog:4\n");
 			= LookupText(g_keytext_list, "mediasize_recommend_message2_2");
 		gchar* alert_msg2_3
 			= LookupText(g_keytext_list, "mediasize_recommend_message2_3");
-			
+
 		gchar* message
 			= (gchar*)g_malloc(strlen(change_msg) + strlen(alert_msg2_1) + strlen(alert_msg2_2) + strlen(alert_msg2_3) +3 );	/* "3":\n+\n+\0 */
 		gchar* tmp_message
@@ -413,10 +413,10 @@ fprintf(stderr,"ShowMediaSizeRecommendDialog:4\n");
 			gchar* next;
 			gchar* change_to;
 			int len;
-			
+
 			/* Ver.3.20: make combo */
 			GtkWidget* combo = LookupWidget(UI_DIALOG(dialog)->window, "mediasize_recommend_combo" );
-		
+
 			/* Remove all items in current list */
 			if(gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ){
 				while( 1 ){
@@ -432,7 +432,7 @@ fprintf(stderr,"ShowMediaSizeRecommendDialog:4\n");
 				strncpy(word, words, len);
 				word[len] = '\0';
 				change_to = LookupText(g_keytext_list, word);
-			
+
 				if( change_to != NULL )
 				{
 					if( *change_to != '\0' ){
@@ -440,24 +440,24 @@ fprintf(stderr,"ShowMediaSizeRecommendDialog:4\n");
 						gtk_combo_box_append_text( GTK_COMBO_BOX( combo ), change_to );
 					}
 				}
-				
+
 				if( i == 0) dialog->current_change_to_id = KeyToValue(change_id, word);		/* default current...set top item */
-				
+
 				words = next;
-				
+
 			}
 			/* Set active item to top */
 			gtk_combo_box_set_active( GTK_COMBO_BOX( combo ), 0 );
 			gtk_widget_show( combo );
-			
+
 			g_free(word);
 		}
 	}
 
 	gtk_window_set_title(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);
 	gtk_window_set_position(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);
 
 	ShowDialog((UIDialog*)dialog, "mediasize_recommend_apply_button");
 
@@ -555,7 +555,7 @@ int ShowMediaSizeIllegalSelectDialog(UIMediaSizeDialog* dialog, gchar* applied)
 
 		/* Ver.3.20: make combo */
 		GtkWidget* combo = LookupWidget(UI_DIALOG(dialog)->window, "mediasize_illegal_combo" );
-	
+
 		/* Remove all items in current list */
 		if(gtk_combo_box_get_active_text( GTK_COMBO_BOX( combo )) ){
 			while( 1 ){
@@ -571,7 +571,7 @@ int ShowMediaSizeIllegalSelectDialog(UIMediaSizeDialog* dialog, gchar* applied)
 			strncpy(word, words, len);
 			word[len] = '\0';
 			change_to = LookupText(g_keytext_list, word);
-			
+
 			if( change_to != NULL )
 			{
 				if( *change_to != '\0' ){
@@ -579,11 +579,11 @@ int ShowMediaSizeIllegalSelectDialog(UIMediaSizeDialog* dialog, gchar* applied)
 					gtk_combo_box_append_text( GTK_COMBO_BOX( combo ), change_to );
 				}
 			}
-			
+
 			if( i == 0) dialog->current_change_to_id = KeyToValue(change_id, word);		/* default current...set top item */
-			
+
 			words = next;
-			
+
 		}
 		/* Set active item to top */
 		gtk_combo_box_set_active( GTK_COMBO_BOX( combo ), 0 );
@@ -593,9 +593,9 @@ int ShowMediaSizeIllegalSelectDialog(UIMediaSizeDialog* dialog, gchar* applied)
 	}
 
 	gtk_window_set_title(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);
 	gtk_window_set_position(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);
 
 	ShowDialog((UIDialog*)dialog, "mediasize_illegal_select_apply_button");
 	return dialog->exec;
@@ -712,14 +712,14 @@ gboolean CheckMediaSizeCombination(LPBJFLTDEVICE bjdev, gboolean* change_item)
 						analyzer_combo = LookupWidget(UI_DIALOG(dialog)->window,  "mediasize_illegal_combo");
 
 					change_to_value_str = (char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(analyzer_combo));
-					
+
 					if( dialog->change == UI_MEDIASIZE_CHANGE_SIZE )	/* change size */
 						change_to_id = NameToValue( CNCL_PAPERSIZE , change_to_value_str );
 					else												/* change media */
 						change_to_id = NameToValue( CNCL_MEDIATYPE , change_to_value_str );
-					
+
 					dialog->current_change_to_id = change_to_id;
-					
+
 					if(change_to_value_str){
 						free(change_to_value_str);
 						change_to_value_str = NULL;
@@ -772,7 +772,7 @@ on_mediasize_illegal_dialog_delete_event
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_illegal_dialog;
-	
+
 	HideMediaSizeDialog( dialog , FALSE, FALSE);
 	return TRUE;
 }
@@ -784,7 +784,7 @@ on_mediasize_illegal_apply_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_illegal_dialog;
-	
+
 	HideMediaSizeDialog( dialog , TRUE, TRUE);
 }
 
@@ -795,7 +795,7 @@ on_mediasize_illegal_cancel_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_illegal_dialog;
-	
+
 	HideMediaSizeDialog( dialog , FALSE, FALSE);
 }
 
@@ -809,7 +809,7 @@ on_mediasize_illegal_select_dialog_delete_event
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_illegal_select_dialog;
-	
+
 	HideMediaSizeDialog( dialog , FALSE, FALSE);
 	return TRUE;
 }
@@ -821,7 +821,7 @@ on_mediasize_illegal_select_apply_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_illegal_select_dialog;
-	
+
 	HideMediaSizeDialog( dialog , TRUE, TRUE);
 }
 
@@ -832,7 +832,7 @@ on_mediasize_illegal_select_cancel_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_illegal_select_dialog;
-	
+
 	HideMediaSizeDialog( dialog , FALSE, FALSE);
 }
 
@@ -846,7 +846,7 @@ on_mediasize_recommend_dialog_delete_event
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_recommend_dialog;
-	
+
 	HideMediaSizeDialog( dialog , FALSE, FALSE);
 	return TRUE;
 }
@@ -858,7 +858,7 @@ on_mediasize_recommend_apply_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_recommend_dialog;
-	
+
 	HideMediaSizeDialog( dialog , TRUE, TRUE);
 }
 
@@ -869,7 +869,7 @@ on_mediasize_recommend_not_apply_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_recommend_dialog;
-	
+
 	HideMediaSizeDialog( dialog , TRUE, FALSE);
 }
 
@@ -880,7 +880,7 @@ on_mediasize_recommend_cancel_button_clicked
                                         gpointer         user_data)
 {
 	UIMediaSizeDialog* dialog = g_mediasize_recommend_dialog;
-	
+
 	HideMediaSizeDialog( dialog , FALSE, FALSE);
 }
 

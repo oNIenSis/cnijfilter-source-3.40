@@ -231,7 +231,7 @@ int main (int argc, const char **argv)
 					/* Ver.3.20 bscc->sts  */
 					if( argv[5] != NULL ){
 						ret3 = bscc2sts(argv[5], &buf[1], &Odev, (Bscc2sts_tbl)&statusStr);
-	
+
 						memset( &buf[1], 0, STATUS_BUF-1 );
 						while( 1 ){
 							buf[i + 1] = statusStr[i];

@@ -69,16 +69,16 @@ enum {
 typedef struct {
 	long	resType;
 	int		uiType;
-//	COMMANDCOMP	*lpCmdComp;		
+//	COMMANDCOMP	*lpCmdComp;
 	GtkWidget *(*ptrCreateDialog)( void );
 } CLEANINGCOMPTYPE001RES, *LPCLEANINGCOMPTYPE001RES;
 
 CLEANINGCOMPTYPE001RES cleaningType001Res[] = {
-	{ RES_CLEANING_COMPTYPE001, UI_CLEANING_TYPE001, create_cleaning_type001_dialog }, 
-	{ RES_CLEANING_COMPTYPE001, UI_DEEPCLEANING_TYPE001, create_cleaning_type001_dialog }, 
-	{ RES_CLEANING_COMPTYPE001, UI_ROLLERCLEANING_TYPE001, create_cleaning_type001_dialog }, 
-	{ RES_CLEANING_COMPTYPE001, UI_ROLLERCLEANING_TYPE002, create_cleaning_type001_dialog }, 
-	{ RES_CLEANING_COMPTYPE001, UI_PLATECLEANING_TYPE001, create_cleaning_type001_dialog }, 
+	{ RES_CLEANING_COMPTYPE001, UI_CLEANING_TYPE001, create_cleaning_type001_dialog },
+	{ RES_CLEANING_COMPTYPE001, UI_DEEPCLEANING_TYPE001, create_cleaning_type001_dialog },
+	{ RES_CLEANING_COMPTYPE001, UI_ROLLERCLEANING_TYPE001, create_cleaning_type001_dialog },
+	{ RES_CLEANING_COMPTYPE001, UI_ROLLERCLEANING_TYPE002, create_cleaning_type001_dialog },
+	{ RES_CLEANING_COMPTYPE001, UI_PLATECLEANING_TYPE001, create_cleaning_type001_dialog },
 };
 
 
@@ -282,7 +282,7 @@ short ExecCleaningType001( void *lpWork, char *dialogName )
 	/* ---- Show Dialog ---- */
 	/* init parameter */
 	InitParamCleaningType001( lpRes, gLPCleaningWork );
-	
+
 	/* show labels */
 	SetLabelCleaningType001( lpRes, gLPCleaningWork, dialogName );
 
@@ -328,7 +328,7 @@ on_cleaning_type001_button001_clicked  (GtkButton       *button,
                                         gpointer         user_data)
 {
 	LPCLEANINGCOMPTYPE001WORK lpWk = (LPCLEANINGCOMPTYPE001WORK)gLPCleaningWork;
-	GtkWidget* window = GetTopWidget(GTK_WIDGET(button));	
+	GtkWidget* window = GetTopWidget(GTK_WIDGET(button));
 	//COMMANDCOMP *lpComp = lpWk->lpCmdComp;
 	int index;
 

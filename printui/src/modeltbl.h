@@ -906,16 +906,16 @@ GLOBAL ModelTable g_model_table[] =
   	{CND_PIXUSIP8600, UF_IP3100,  g_media_size_table_pixus560i,	g_media_size_table_pixus560i,		-1}, // Format 4
   	{CND_IP2200,      UF_IP2200,  g_media_size_table_ip4200,   	g_media_size_table_ip4200_jp,	-1},
   	{CND_IP4200,      UF_IP4200,  g_media_size_table_ip4200,   	g_media_size_table_ip4200_jp,	-1},
-  	{CND_IP6600D,     UF_IP6600D, g_media_size_table_ip4200,   	g_media_size_table_ip4200_jp,	-1}, 
-  	{CND_IP7500,      UF_IP7500,  g_media_size_table_ip7500,   	g_media_size_table_ip7500_jp,	-1},	
-  	{CND_MP500,       UF_MP500,   g_media_size_table_ip4200,   	g_media_size_table_ip4200_jp,	-1},	
-  	{CND_IP3300,      UF_IP3300,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	
-  	{CND_MP510,       UF_MP510,   g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	
-  	{CND_IP4300,      UF_IP4300,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	
-  	{CND_MP600,       UF_MP600,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	
+  	{CND_IP6600D,     UF_IP6600D, g_media_size_table_ip4200,   	g_media_size_table_ip4200_jp,	-1},
+  	{CND_IP7500,      UF_IP7500,  g_media_size_table_ip7500,   	g_media_size_table_ip7500_jp,	-1},
+  	{CND_MP500,       UF_MP500,   g_media_size_table_ip4200,   	g_media_size_table_ip4200_jp,	-1},
+  	{CND_IP3300,      UF_IP3300,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},
+  	{CND_MP510,       UF_MP510,   g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},
+  	{CND_IP4300,      UF_IP4300,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},
+  	{CND_MP600,       UF_MP600,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},
   	{CND_MP160,       UF_MP160,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	//2006_0616
   	{CND_IP90,        UF_IP90,   g_media_size_table_ip90,   	g_media_size_table_ip90_jp,	-1},	//2006_1020
-  	{CND_IP2500,      UF_IP2500,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	//2006_0706 
+  	{CND_IP2500,      UF_IP2500,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	//2006_0706
   	{CND_IP1800,      UF_IP2500,  g_media_size_table_ip4300,   	g_media_size_table_ip4300_jp,	-1},	//2006_0706
   	{CND_MP140,       UF_MP160,   g_media_size_table_ip4500,   	g_media_size_table_ip4500_jp,	-1},
   	{CND_MP210,       UF_MP160,   g_media_size_table_ip4500,   	g_media_size_table_ip4500_jp,	-1},

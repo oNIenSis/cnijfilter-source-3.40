@@ -138,13 +138,13 @@ static short SetColorCorrectCombo2(UIColorDialog2* dialog , short intent)
 
 	/* Ver.2.80 */
 	dialog->intent_num = SetItemsToComboBox( UI_DIALOG(dialog)->window, "color_dialog_correct_combo2", CNCL_INTENT, intent );
-	
+
 	return intent;
 }
 
 
 static void SensitiveColorCorrectCombo(
-					UIColorDialog2* dialog, gboolean sensitive) 
+					UIColorDialog2* dialog, gboolean sensitive)
 {
 	GtkWidget* combo
 		= LookupWidget(UI_DIALOG(dialog)->window, "color_dialog_correct_combo2");
@@ -174,10 +174,10 @@ static short CofirmSpinValue( spinbutton )
 		//gtk_entry_set_text( GTK_ENTRY( spinbutton ) , "0" );
 		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinbutton), 1 );
 		gtk_spin_button_set_value( GTK_SPIN_BUTTON( spinbutton), 0 );
-		
+
 		result = 1;
 	}
-		
+
 	return result;
 }
 
@@ -340,9 +340,9 @@ void ShowColorDialog2(UIColorDialog2* dialog)
 		else {
 			sensitive = FALSE;
 		}
-		
+
 		for ( i=0; bw_sensitive_name_black_adjustment[i] != NULL; i++ ){
-			gtk_widget_set_sensitive( LookupWidget(UI_DIALOG(dialog)->window, 
+			gtk_widget_set_sensitive( LookupWidget(UI_DIALOG(dialog)->window,
 				bw_sensitive_name_black_adjustment[i]), sensitive  );
 		}
 	}
@@ -350,7 +350,7 @@ void ShowColorDialog2(UIColorDialog2* dialog)
 	/* Ver.2.80 */
 	EnableSignal();
 
-	ShowDialog((UIDialog*)dialog, "color_dialog_ok_button2"); 
+	ShowDialog((UIDialog*)dialog, "color_dialog_ok_button2");
 }
 
 
@@ -382,7 +382,7 @@ void HideColorDialog2(UIColorDialog2* dialog, gboolean apply)
 		/* CNCL_INPUT_GAMMA : Set current setting */
 		dialog->gamma = GetCurrentnValue(CNCL_INPUT_GAMMA);
 	}
-	else	
+	else
 	{	/* "Cancel" -> Recover parameters. */
 		UpdateMenuLink(CNCL_INPUT_GAMMA, dialog->gamma);
 		UpdateMenuLink(CNCL_INTENT, dialog->color_correct);
@@ -503,7 +503,7 @@ static void C_DLG_ScaleValueChanged( GtkRange   *range , short id )
 	GtkWidget* window = UI_DIALOG(g_color_dialog2)->window;
 	GtkSpinButton   *spinbutton = GTK_SPIN_BUTTON(LookupWidget( window, spin_scale_table[id].spin_name ) );
 
-	
+
 	if( DisableSignal() )	/* Ver.2.90: Prevent the endless loop between "scale" and "spinbutton" */
 	{
 		gtk_spin_button_set_value( spinbutton , (gdouble)gtk_range_get_value( range ) );
@@ -586,7 +586,7 @@ static void C_DLG_SpinValueChanged( GtkSpinButton   *spinbutton , short id )
 	if( DisableSignal() )
 	{
 		spin_value = spinbutton->adjustment->value;
-	
+
 		/* Prevent from showing "-0" */
 		if( CofirmSpinValue( spinbutton ) )
 		{

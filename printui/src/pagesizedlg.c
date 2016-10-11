@@ -53,7 +53,7 @@ gboolean IsAvailableSupplySize()
 	ret = CNCL_ConfirmSupplySize(&g_uidb.nominfo,(void*)g_bjlibdir, g_uidb.lpdbTop, g_uidb.dbsize);
 #ifdef _PRINTUI_DEBUG_
 	fprintf(stderr,"CNCL_ConfirmSupplySize=%d\n",ret);
-#endif	
+#endif
 
 	if( ret ) result = TRUE;
 	return result;
@@ -71,7 +71,7 @@ gboolean IsAvailableSizeDuplex()
 #ifdef _PRINTUI_DEBUG_
 	fprintf(stderr,"CNCL_ConfirmSizeDuplex=%d\n",ret);
 #endif
-	
+
 	if( ret ) result = TRUE;
 	return result;
 

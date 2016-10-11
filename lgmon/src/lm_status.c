@@ -108,7 +108,7 @@ static int setup_bscc(int dev_path, char *jobIDStr)
 	int error = 0;
 	int sta = 0;
 	int count;
-	char *bscc_com; 
+	char *bscc_com;
 	//                  ESC   [    K   C-lo C-hi INIT  ID  L-hi L-lo (total 9byte)
 	char bscc_head[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 	//char bscc_head[] = {0x1b,0x5b,0x4b,0x00,0x00,0x00,0x1e,0x00,0x00};

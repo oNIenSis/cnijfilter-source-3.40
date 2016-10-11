@@ -26,7 +26,7 @@
 
 gboolean SameName(gchar* name1, gchar* name2);
 GtkWidget* LookupWidget(GtkWidget* window, const gchar* name);
-GtkWidget* GetTopWidget(GtkWidget* widget); 
+GtkWidget* GetTopWidget(GtkWidget* widget);
 
 void UpdateWidgets(GtkWidget* window, gchar* except_name);
 

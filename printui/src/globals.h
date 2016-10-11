@@ -63,7 +63,7 @@ GLOBAL const gchar* g_quality_button_name[] =
 	NULL
 };
 
-GLOBAL const int g_mess_map[] = 
+GLOBAL const int g_mess_map[] =
 {
 	CNCL_MESS_Q_MAP1,
 	CNCL_MESS_Q_MAP2,

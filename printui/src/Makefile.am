@@ -55,6 +55,6 @@ printui_CFLAGS = -O2 -Wall @UI_DFLAGS@
 #  -lcnbpcnclui@CNCL_LIB_ID@ -lcnbpcmcm@CNCL_LIB_ID@
 printui_LDADD = @GTK_LIBS@ -lxml2 -lpopt \
   -lcnbpcnclui@CNCL_LIB_ID@ -lcnbpcmcm@CNCL_LIB_ID@ -lcnbpcnclapi@CNCL_LIB_ID@ \
-  -lcnbpcnclbjcmd@CNCL_LIB_ID@ -lcnbpess@CNCL_LIB_ID@ 
+  -lcnbpcnclbjcmd@CNCL_LIB_ID@ -lcnbpess@CNCL_LIB_ID@
 
 printui_LDFLAGS = -L../../@CNCL_LIB_ID@/libs_bin@ARC@

@@ -30,7 +30,7 @@
 
 #ifdef	DEFINE_GLOBALS
 
-const long PaperTbl[][3] = 
+const long PaperTbl[][3] =
 {
 	{0, 14800, 21000},		/* A5 (148mm x 210mm) */
 	{1, 21000, 14800},		/* A5-L (210mm x 148mm) */
@@ -92,7 +92,7 @@ const long PaperTbl[][3] =
 	{1070, 10160, 20320},	/* 4x8 (101.6x203.2mm) */
 	{1073, 20320, 25400},	/* 8x10 (203.2x254.0mm) */
 	{1082, 10160, 18062},	/* wide */
-	{-1, -1, -1}			/* Max indicator */	
+	{-1, -1, -1}			/* Max indicator */
 };
 
 #else

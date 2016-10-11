@@ -179,7 +179,7 @@ int LoadResources()
 			return 0;
 	}
 
-	g_unit_inch = (strcmp(unit_name, DEFAULT_UNIT_MM))? TRUE : FALSE; 
+	g_unit_inch = (strcmp(unit_name, DEFAULT_UNIT_MM))? TRUE : FALSE;
 
 #ifdef	USE_LIB_GLADE
 	// Connect all signal handlers.

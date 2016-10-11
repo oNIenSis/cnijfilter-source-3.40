@@ -78,8 +78,8 @@ void DrawString(GdkWindow* window, GdkFont* font, GdkGC* gc,
 }
 
 // Ver2.60
-// Because g_strup() cannot be used by the version of GTK, 
-// it originally makes it. 
+// Because g_strup() cannot be used by the version of GTK,
+// it originally makes it.
 void UpperAsciiStr(char *str)
 {
 	gint i;
@@ -90,8 +90,8 @@ void UpperAsciiStr(char *str)
 }
 
 // Ver2.60
-// Because tolower() cannot be used by the version of GTK 
-// in the Turkish environment, it originally makes it. 
+// Because tolower() cannot be used by the version of GTK
+// in the Turkish environment, it originally makes it.
 int LowerAsciiCode( int c )
 {
 	if( c >= 'A' && c <= 'Z' ) return (c + 0x20);

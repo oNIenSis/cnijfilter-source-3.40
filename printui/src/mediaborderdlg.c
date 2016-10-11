@@ -74,7 +74,7 @@ static void InitBorderlessMedia(UIMediaBorderDialog* dialog)
 	short *pBorderlessMediaValue = NULL;
 	char *str;
 	short itemNum;
-	
+
 	int i = 0, j;
 
 	dialog->media_list = NULL;
@@ -82,7 +82,7 @@ static void InitBorderlessMedia(UIMediaBorderDialog* dialog)
 	if ((pBorderlessMediaValue = (short *)g_malloc(sizeof(short) * CND_MEDIA_MAX)) == NULL ) goto Err;
 
 	itemNum = 0;
-	if ( (itemNum = CNCL_GetMinusMediaList( &g_uidb.nominfo, (void*)g_bjlibdir, g_uidb.lpdbTop, 
+	if ( (itemNum = CNCL_GetMinusMediaList( &g_uidb.nominfo, (void*)g_bjlibdir, g_uidb.lpdbTop,
 		g_uidb.dbsize, pBorderlessMediaValue)) < 0 ){
 		goto Err;
 	}
@@ -153,18 +153,18 @@ int ShowMediaBorderDialog(UIMediaBorderDialog* dialog, short media_type)
 	gtk_label_set_text(GTK_LABEL(alert_label), alert_msg);
 
 	gtk_window_set_title(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), g_window_title);
 	gtk_window_set_position(
-		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);	
+		GTK_WINDOW(UI_DIALOG(dialog)->window), GTK_WIN_POS_CENTER);
 
 	g_free(message);
 
 	if( dialog->media_list )
 	{
 		short	def_media = -1;
-		
+
 		def_media = GetCurrentnValue( CNCL_DEFMEDIATYPE_MINUS );
-		
+
 		if( def_media < 0 )		/* CNCL_DEFMEDIATYPE_MINUS value is not available */
 		{
 			SetGListToComboBox(UI_DIALOG(dialog)->window, "mediaborder_dialog_combo",
@@ -175,10 +175,10 @@ int ShowMediaBorderDialog(UIMediaBorderDialog* dialog, short media_type)
 			SetGListToComboBox(UI_DIALOG(dialog)->window, "mediaborder_dialog_combo",
 						dialog->media_list, ValueToName(CNCL_MEDIATYPE, def_media ) , CNCL_MEDIATYPE);
 		}
-	
+
 	}
 
-	ShowDialog((UIDialog*)dialog, "mediaborder_dialog_ok_button"); 
+	ShowDialog((UIDialog*)dialog, "mediaborder_dialog_ok_button");
 
 	return dialog->apply? dialog->selected_media : -1;
 }
@@ -189,7 +189,7 @@ void HideMediaBorderDialog(UIMediaBorderDialog* dialog, gboolean apply)
 	{
 		/* Ver.2.80 */
 		GtkWidget* combo = LookupWidget( UI_DIALOG(dialog)->window , "mediaborder_dialog_combo" );
-		dialog->selected_media = NameToValue(CNCL_MEDIATYPE, 
+		dialog->selected_media = NameToValue(CNCL_MEDIATYPE,
 								(char*)gtk_combo_box_get_active_text(GTK_COMBO_BOX(combo)) );
 	}
 

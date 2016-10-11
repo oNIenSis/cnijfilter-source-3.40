@@ -234,7 +234,7 @@ void ShowPaperGapCombo(main_window)
 	gchar* label_name = ValueToName( CNUI_OBJECT_LEVER , CNUI_VALUE_LEVER_LABEL );
 	gtk_label_set_text(GTK_LABEL(label), label_name);
 
-	
+
 	if( GetCurrentPaperGap() == CND_PGAP_CMD_NA )
 	{
 		if( GetCurrentnValue(CNCL_MESS_THICK) != CND_TMESSAGE_NA )

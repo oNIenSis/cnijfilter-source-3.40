@@ -66,9 +66,9 @@ static const char	*paperGapString[] = {
 	"WIDE"
 };
 
-static const char	*autoPowerOnValue[] = {		
-	"Disable",                  
-	"Enable",					
+static const char	*autoPowerOnValue[] = {
+	"Disable",
+	"Enable",
 };
 
 static const short drylevel5_button_value[] =
@@ -80,13 +80,13 @@ static const short drylevel5_button_value[] =
 	5,
 };
 
-static const char	*autoPowerOffValue[] = {		
-	"Disable",                  
-	"5",                        
-	"10",                       
-	"15",                       
-	"30",                       
-	"60"                        
+static const char	*autoPowerOffValue[] = {
+	"Disable",
+	"5",
+	"10",
+	"15",
+	"30",
+	"60"
 };
 
 static const char	*switchString[2] = {
@@ -103,10 +103,10 @@ typedef struct{
 	short nValue[INKCRTRG_NUM_MAX];
 }INKCRTRGMSGINFO;
 
-INKCRTRGMSGINFO inkCartridgeInfo[] = 
-{ 
+INKCRTRGMSGINFO inkCartridgeInfo[] =
+{
 	{ 3, 2, { "util_ink_cartridge_1", 		// type A
-	   		"util_ink_cartridge_2", 
+	   		"util_ink_cartridge_2",
 		    "util_ink_cartridge_3" },
  		  { "utility_message_55",
 		   	"utility_message_56",
@@ -115,7 +115,7 @@ INKCRTRGMSGINFO inkCartridgeInfo[] =
 		   	CND_CARTRIDGE_BK,
 			CND_CARTRIDGE_BK_COLOR } },
 	{ 3, 2, { "util_ink_cartridge_1", 		// type B
-	   		"util_ink_cartridge_2", 
+	   		"util_ink_cartridge_2",
 		    "util_ink_cartridge_3" },
  		  { "utility_message_55",
 		   	"LUM_IDS_CARTRIDGE_EXP_BK_2",
@@ -124,7 +124,7 @@ INKCRTRGMSGINFO inkCartridgeInfo[] =
 		   	CND_CARTRIDGE_BK,
 			CND_CARTRIDGE_BK_COLOR } },
 	{ 3, 2, { "util_ink_cartridge_1", 		// type C
-	   		"util_ink_cartridge_2", 
+	   		"util_ink_cartridge_2",
 		    "util_ink_cartridge_3" },
  		  { "utility_message_55",
 		   	"LUM_IDS_CARTRIDGE_EXP_BK_3",
@@ -152,10 +152,10 @@ typedef struct {
 } SETCONFIGCOMPTYPE001RES, *LPSETCONFIGCOMPTYPE001RES;
 
 SETCONFIGCOMPTYPE001RES setConfigType001Res[] = {
-	{ RES_SETCONFIG_COMPTYPE001, UI_CUSTOMSETTINGS_TYPE001, create_setconfig_type001_dialog }, 
-	{ RES_SETCONFIG_COMPTYPE001, UI_AUTOPOWER_TYPE001, create_setconfig_type001_dialog }, 
-	{ RES_SETCONFIG_COMPTYPE001, UI_PAPERSOURCESETTINGS_TYPE001, create_setconfig_type001_dialog }, 
-	{ RES_SETCONFIG_COMPTYPE001, UI_QUIET_TYPE001, create_setconfig_type001_dialog }, 
+	{ RES_SETCONFIG_COMPTYPE001, UI_CUSTOMSETTINGS_TYPE001, create_setconfig_type001_dialog },
+	{ RES_SETCONFIG_COMPTYPE001, UI_AUTOPOWER_TYPE001, create_setconfig_type001_dialog },
+	{ RES_SETCONFIG_COMPTYPE001, UI_PAPERSOURCESETTINGS_TYPE001, create_setconfig_type001_dialog },
+	{ RES_SETCONFIG_COMPTYPE001, UI_QUIET_TYPE001, create_setconfig_type001_dialog },
 };
 
 /* SETCONFIG COMPTYPE002 */
@@ -165,7 +165,7 @@ typedef struct {
 } SETCONFIGCOMPTYPE002RES, *LPSETCONFIGCOMPTYPE002RES;
 
 SETCONFIGCOMPTYPE002RES setConfigType002Res[] = {
-	{ RES_SETCONFIG_COMPTYPE002, MB_ICON_EXCLAMATION | MB_OK | MB_CANCEL }, 
+	{ RES_SETCONFIG_COMPTYPE002, MB_ICON_EXCLAMATION | MB_OK | MB_CANCEL },
 };
 
 /* SETCONFIG COMPTYPE003 */
@@ -226,18 +226,18 @@ static const gchar* setconfig_type001_radiobutton_name[] =
 };
 
 
-static const gchar	*setconfig_type001_02_onlist[] = {		
-	"autopower_disable",		
+static const gchar	*setconfig_type001_02_onlist[] = {
+	"autopower_disable",
 	"autopower_enable",
 	NULL
 };
 
-static const gchar	*setconfig_type001_02_offlist[] = {		
-	"autopower_disable",		
-	"autopower_5min",			
-	"autopower_10min",			
-	"autopower_15min",			
-	"autopower_30min",			
+static const gchar	*setconfig_type001_02_offlist[] = {
+	"autopower_disable",
+	"autopower_5min",
+	"autopower_10min",
+	"autopower_15min",
+	"autopower_30min",
 	"autopower_60min",
 	NULL
 };
@@ -378,12 +378,12 @@ void InitCreate_SetConfigType001_QuietMode( void )
  static int GetAutoPowerIndex(char **Keytbl, int n, char *mode)
 {
 	int			i;
-	
+
 	for (i=0; i < n; i++) {
-		if (!strcmp(LookupText(g_keytext_list, Keytbl[i]), mode))	
-			return i;		
+		if (!strcmp(LookupText(g_keytext_list, Keytbl[i]), mode))
+			return i;
 	}
-	return 0;		
+	return 0;
 }
 
 static LPSETCONFIGCOMPTYPE001WORK CreateWorkSetConfigType001( LPSETCONFIGCOMPTYPE001RES lpRes )
@@ -454,7 +454,7 @@ static void SetDefaultSetConfigType001_AutoPower( GtkWidget *dialog, short onInd
 	onSize = sizeof(setconfig_type001_02_onlist)/sizeof(*setconfig_type001_02_onlist) - 1;
 	offSize = sizeof(setconfig_type001_02_offlist)/sizeof(*setconfig_type001_02_offlist) - 1;
 
-	SetComboBoxItems(powerOnCombo, setconfig_type001_02_onlist, onSize, onIndex);		
+	SetComboBoxItems(powerOnCombo, setconfig_type001_02_onlist, onSize, onIndex);
 	SetComboBoxItems(powerOffCombo, setconfig_type001_02_offlist, offSize , offIndex);
 
 	gtk_widget_show( powerOnCombo );
@@ -556,7 +556,7 @@ short ExecSetConfigType001( void *lpWork, char *dialogName )
 	/* ---- Show Dialog ---- */
 	/* init parameter */
 	InitParamSetConfigType001( lpRes, gLPSetConfigWork );
-	
+
 	/* show labels */
 	SetLabelSetConfigType001( lpRes, gLPSetConfigWork, dialogName );
 
@@ -571,7 +571,7 @@ short ExecSetConfigType001( void *lpWork, char *dialogName )
 
 	DisposeWorkSetConfigType001( gLPSetConfigWork );
 Err:
-	gLPSetConfigWork = NULL;	
+	gLPSetConfigWork = NULL;
 	return result;
 }
 
@@ -603,9 +603,9 @@ on_setconfig_type001_checkbutton_toggled
                                         (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-	GtkWidget* window = GetTopWidget(GTK_WIDGET(togglebutton));	
+	GtkWidget* window = GetTopWidget(GTK_WIDGET(togglebutton));
 
-	if ( GTK_WIDGET_VISIBLE( window ) == TRUE ){	
+	if ( GTK_WIDGET_VISIBLE( window ) == TRUE ){
 		if( GTK_TOGGLE_BUTTON(togglebutton)->active ) {
 			UtilMessageBox(LookupText(g_keytext_list, "LUM_LID_WARNING_PAPER_ABRASION"), g_window_title, MB_ICON_NO | MB_OK);
 		}
@@ -620,7 +620,7 @@ on_setconfig_type001_button1_clicked
 {
 	LPSETCONFIGCOMPTYPE001WORK lpWk = (LPSETCONFIGCOMPTYPE001WORK)gLPSetConfigWork;
 	if ( CheckWorkType001() != 0 ) goto Err;
-	GtkWidget* window = GetTopWidget(GTK_WIDGET(button));	
+	GtkWidget* window = GetTopWidget(GTK_WIDGET(button));
 	GtkWidget* check_button = NULL;
 
 	if ( lpWk->uiType == UI_CUSTOMSETTINGS_TYPE001 ){
@@ -651,9 +651,9 @@ on_setconfig_type001_button1_clicked
 
 		gCurrentAutoPowerOnIndex = GetAutoPowerIndex( setconfig_type001_02_onlist, onSize, onStr );
 		gCurrentAutoPowerOffIndex = GetAutoPowerIndex( setconfig_type001_02_offlist, offSize, offStr );
-	}	
+	}
 	else if ( lpWk->uiType == UI_PAPERSOURCESETTINGS_TYPE001 ) {
-		gCurrentPaperSourceSettingsValue = 
+		gCurrentPaperSourceSettingsValue =
 			(short)GetActiveButtonIndex( window, setconfig_type001_ps_radiobutton_name, PAPERSOURCE_SETTINGS_TYPE001_RADIOBUTTON_DEFAULT );
 	}
 	else if ( lpWk->uiType ==  UI_QUIET_TYPE001 ){
@@ -687,13 +687,13 @@ on_setconfig_type001_button3_clicked
 
 	if ( gUiType == UI_CUSTOMSETTINGS_TYPE001 ){
 		SetDefaultSetConfigType001_CustomSettings( button, 0, 0, CUSTOM_SETTINGS_TYPE001_RADIOBUTTON_DEFAULT );
-	}	
+	}
 	else if ( gUiType == UI_AUTOPOWER_TYPE001 ) {
 
-	}	
+	}
 	else if ( gUiType == UI_PAPERSOURCESETTINGS_TYPE001 ) {
 		SetDefaultSetConfigType001_PaperSourceSettings( button, PAPERSOURCE_SETTINGS_TYPE001_RADIOBUTTON_DEFAULT );
-	}	
+	}
 	else if ( gUiType ==  UI_QUIET_TYPE001 ){
 		SetDefaultSetConfigType001_QuietMode( button, 0 );
 	}
@@ -786,7 +786,7 @@ static short GetStatusSetConfigType002( void *lpGWork )
 -------------------------------------------------------------------------------*/
 unsigned int GetFlagSetConfigType002( void )
 {
-	LPSETCONFIGCOMPTYPE002WORK lpWk = (LPSETCONFIGCOMPTYPE002WORK)gLPSetConfigWork;	
+	LPSETCONFIGCOMPTYPE002WORK lpWk = (LPSETCONFIGCOMPTYPE002WORK)gLPSetConfigWork;
 	if ( lpWk != NULL ) {
 		return lpWk->flag;
 	}
@@ -845,7 +845,7 @@ int nValueToIndex(short *nValuetbl, int n, short nValue)
 #if 0
 void InitCreate_SetConfigType003_InkCartridgeSettings( void )
 {
-	gInkCartridgeIndex = 0;	
+	gInkCartridgeIndex = 0;
 	gCurrentInkCartridgeIndex = 0;
 }
 #endif
@@ -940,7 +940,7 @@ short ExecSetConfigType003( void *lpWork, char *dialogName )
 	/* ---- Show Dialog ---- */
 	/* init parameter */
 	InitParamSetConfigType003( lpRes, gLPSetConfigWork );
-	
+
 	/* show labels */
 	SetLabelSetConfigType003( lpRes, gLPSetConfigWork, dialogName );
 
@@ -996,9 +996,9 @@ on_setconfig_type003_dialog_combo_changed
 	if( DisableSignal() )
 	{
 		type = (char*)gtk_combo_box_get_active_text( combobox );
-	
+
 		currentIndex = KeyToIndex(lpWk->lpInkCartridgeMsgInfo->type, index_num, type );
-	
+
 		msg = LookupText(g_keytext_list, lpWk->lpInkCartridgeMsgInfo->info[currentIndex]);
 		label = LookupWidget(GTK_WIDGET(combobox), "setconfig_type003_label3");
 		gtk_label_set_text(GTK_LABEL(label), msg);

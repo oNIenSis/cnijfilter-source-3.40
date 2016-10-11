@@ -113,7 +113,7 @@ void ShowQualityDialog(UIQualityDialog* dialog)
 {
 	UpdateQualityDialogWidgets(UI_DIALOG(dialog)->window, NULL);
 
-	/*	
+	/*
 	dialog->print_quality = GetCurrentnValue(CNCL_PRINTQUALITY);
 	dialog->bin_method = GetCurrentnValue(CNCL_DITHER_PAT);
 	*/
@@ -130,7 +130,7 @@ void HideQualityDialog(UIQualityDialog* dialog, gboolean apply)
 	}
 	else
 		SetQualityCustomValue(dialog);
-	
+
 
 	HideDialog((UIDialog*)dialog);
 }
