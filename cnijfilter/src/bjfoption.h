@@ -1,6 +1,6 @@
 /*
  *  Canon Inkjet Printer Driver for Linux
- *  Copyright CANON INC. 2001-2010
+ *  Copyright CANON INC. 2001-2012
  *  All Rights Reserved.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -83,6 +83,8 @@
 #define OPTSUPPORTNETWORK		46
 #define OPTTONE			47
 
+#define OPTROTATE		48
+
 #define	OPTINDEX(x)		( (x >> 5) & 0xf)
 #define	OPTBIT(x)		( 1 << (x & 0x1f) )
 
@@ -110,7 +112,7 @@
 #define OPTSTRDISPLAY		"display"
 #define OPTSTRFIT			"fit"
 #define OPTSTRFULL			"full"
-#define OPTSTRINTVER		"internalversion"	
+#define OPTSTRINTVER		"internalversion"
 #define OPTSTRBORDERLESS	"borderless"
 #define OPTSTREXTENSION		"extension"
 #define OPTSTRPERCENT		"percent"
@@ -135,6 +137,8 @@
 #define OPTSTRSUPPORTNETWORK	"supportnetwork"
 
 #define OPTSTRTONE			"tone"
+
+#define OPTSTRROTATE		"rotate"
 
 /* cif.bscc value */
 #define	BSCCREG		0
@@ -184,6 +188,7 @@ typedef struct {
 	int		bidi;
 	int		supportnetwork;
 	int		tone;
+	int		rotate;
 } OPT, *LPOPT;
 
 
@@ -207,17 +212,18 @@ typedef struct {
 	short	collate;
 	short	stapleside;
 	short	is_ivec;
+	short	rotate;
 	BJF_BBOX	bbox;
 } BJF_OPTINFO, *LPBJF_OPTINFO;
 
 /* over margin */
-static short ExtensionTbl[][2] = 
+static short ExtensionTbl[][2] =
 {
 	{0, CND_OVERMARGINLEVEL_00},
 	{1, CND_OVERMARGINLEVEL_01},
 	{2, CND_OVERMARGINLEVEL_02},
 	{3, CND_OVERMARGINLEVEL_03},
-	{-1, -1}			/* Max indicator */	
+	{-1, -1}			/* Max indicator */
 };
 
 
@@ -246,8 +252,9 @@ static short ExtensionTbl[][2] =
 #define		OPT_ERR_INKCAR		(21)
 #define		OPT_ERR_CONTRAST	(22)
 #define		OPT_ERR_TONE		(23)
+#define		OPT_ERR_ROTATE		(24)
 
-#define		OPT_ERR_CODE_MAX	(24)
+#define		OPT_ERR_CODE_MAX	(25)
 
 
 static char usage_err_mes[OPT_ERR_CODE_MAX][256]={
@@ -275,6 +282,8 @@ static char usage_err_mes[OPT_ERR_CODE_MAX][256]={
 	"",
 	"Allowed argument of \"--contrast\" : -50  -   50\n",
 	"Allowed argument of \"--tone\" : -50  -   50\n",
+	"Allowed argument of \"--rotate\" : 0  -  3\n",
+
 };
 
 

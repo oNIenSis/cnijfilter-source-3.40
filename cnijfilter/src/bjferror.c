@@ -1,6 +1,6 @@
 /*
  *  Canon Inkjet Printer Driver for Linux
- *  Copyright CANON INC. 2001-2010
+ *  Copyright CANON INC. 2001-2012
  *  All Rights Reserved.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -34,24 +34,24 @@ short bjf_error( char *, short );
 short bjf_error( char *message, short err_code )
 {
 	if ( err_code == NO_ERROR ) return 0;
-	
-	fprintf( stderr, "CIF COMMAND ERROR :" );
-	
+
+	fprintf( stderr, "Error: " );
+
 	switch( err_code ){
 		case FILE_ERROR:
-			fprintf( stderr, "file access Error!\n" );
+			fprintf( stderr, "error occurred while accessing the specified file or stdin; " );
 			break;
 		case MEMORY_ERROR:
-			fprintf( stderr, "memory allocate Error!\n" );
+			fprintf( stderr, "failed to allocate memory; " );
 			break;
 		default:
 			break;
 	}
-	
-	
+
+
 	if ( message != NULL ){
 		fprintf( stderr, "%s\n", message );
 	}
-	
+
 	return 0;
 }

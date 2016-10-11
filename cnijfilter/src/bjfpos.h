@@ -1,6 +1,6 @@
 /*
  *  Canon Inkjet Printer Driver for Linux
- *  Copyright CANON INC. 2001-2010
+ *  Copyright CANON INC. 2001-2012
  *  All Rights Reserved.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -84,6 +84,7 @@ typedef struct BJF_MARGIN_INFO				/* borderless information  */
 extern void bjf_pos_img_init( LPBJF_POS_IMGINFO lpimginfo );
 extern void bjf_pos_prn_init( LPBJF_POS_PRNINFO lpprninfo );
 extern void bjf_pos_init( LPBJF_POSINFO lpposinfo );
+extern void bjf_margin_init( LPBJF_MARGIN_INFO );
 extern short bjf_pos_imageresolution( LPBJF_POS_IMGINFO, LPBJF_POS_PRNINFO, LPBJF_POSINFO );
 extern short bjf_pos_imageresolution_fit( LPBJF_POS_IMGINFO, LPBJF_POS_PRNINFO, LPBJF_POSINFO );
 extern short bjf_pos_imageresolution_center( LPBJF_POS_IMGINFO, LPBJF_POS_PRNINFO, LPBJF_POSINFO );
@@ -120,8 +121,9 @@ extern short ImageScaling(LPBJF_POS_PRNINFO, LPBJF_POSINFO,short);
 extern short ImageCenter( LPBJF_POS_IMGINFO, LPBJF_POS_PRNINFO, LPBJF_POSINFO, LPBJF_MARGIN_INFO );
 extern short ImageCut( LPBJF_POS_IMGINFO, LPBJF_POS_PRNINFO, LPBJF_POSINFO, LPBJF_MARGIN_INFO );
 extern short MarginInit(LPBJF_POS_PRNINFO, LPBJF_POSINFO, LPBJF_MARGIN_INFO);
+extern short SetExtLevel( LPBJF_MARGIN_INFO, short);
 extern short SetExtMargin(LPBJF_POS_PRNINFO, LPBJF_POSINFO, LPBJF_MARGIN_INFO, LPBJFLTOVERMARGININFO);
-extern short SetBbox( LPBJF_POS_IMGINFO, long *, LPBJF_POSINFO, LPBJF_MARGIN_INFO );
+extern short SetBbox(LPBJF_OPTINFO , LPBJF_POS_IMGINFO , LPBJF_POSINFO , LPBJF_MARGIN_INFO , int , int);
 short bjf_pos_set_paperwidth( LPBJF_MARGIN_INFO , long );
 short bjf_pos_set_paperlength( LPBJF_MARGIN_INFO , long );
 

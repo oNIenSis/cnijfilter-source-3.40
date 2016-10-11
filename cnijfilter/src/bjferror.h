@@ -1,6 +1,6 @@
 /*
  *  Canon Inkjet Printer Driver for Linux
- *  Copyright CANON INC. 2001-2010
+ *  Copyright CANON INC. 2001-2012
  *  All Rights Reserved.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@
 #define NO_ERROR	0
 
 #define FILE_ERROR		-3
-#define MEMORY_ERROR	-2	
+#define MEMORY_ERROR	-2
 #define DEFAULT_ERROR	-1
 
 extern short bjf_error( char *, short );

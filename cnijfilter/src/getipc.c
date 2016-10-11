@@ -1,6 +1,6 @@
 /*
  *  Canon Inkjet Printer Driver for Linux
- *  Copyright CANON INC. 2001-2010
+ *  Copyright CANON INC. 2001-2012
  *  All Rights Reserved.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -43,7 +43,7 @@ short GetIPCData(LPIPCU pipc, char *sname)
 	struct sockaddr_un		sun;
 	int						s, c;
 	char					buf[128];
-	size_t					adrlen;
+	socklen_t				adrlen;
 	short					ret = RET_ERROR;
 
 	if ((s = socket(PF_UNIX, SOCK_STREAM, 0)) < 0)

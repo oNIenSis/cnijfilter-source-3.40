@@ -1,6 +1,6 @@
 /*
  *  Canon Inkjet Printer Driver for Linux
- *  Copyright CANON INC. 2001-2010
+ *  Copyright CANON INC. 2001-2012
  *  All Rights Reserved.
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -26,11 +26,11 @@
 #ifndef _BJFVERSION_H_
 #define _BJFVERSION_H_
 
-#define VERSION_STR		"Canon Inkjet Printer Driver Ver.3.40 for Linux (cif)"
-#define COPYRIGHT_STR0	"Copyright CANON INC. 2001-2010"
+#define VERSION_STR		"Canon Inkjet Printer Driver Ver.3.80 for Linux (cif)"
+#define COPYRIGHT_STR0	"Copyright CANON INC. 2001-2012"
 #define COPYRIGHT_STR1	"All Rights Reserved."
 
-#define INTERNAL_VERSION_STR	"3.40.01.006"
+#define INTERNAL_VERSION_STR	"3.85.01.001"
 
 #endif
 
